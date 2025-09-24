@@ -83,7 +83,7 @@ params:
   rssFullContent: true
   # 网站的 favicon 图标路径。图标文件需放在 `static` 目录下。
   # 示例: /favicon.ico
-  favicon:
+  favicon: /favicon.png
 
   # 页脚设置
   footer:
