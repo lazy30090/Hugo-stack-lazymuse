@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>CS on lazy</title>
-        <link>https://lazymuse.com/tags/cs/</link>
-        <description>Recent content in CS on lazy</description>
+        <title>CS on lazymuse</title>
+        <link>https://lazy30090.github.io/Hugo-stack-lazymuse/tags/cs/</link>
+        <description>Recent content in CS on lazymuse</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>lazy</copyright>
-        <lastBuildDate>Tue, 23 Sep 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://lazymuse.com/tags/cs/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 23 Sep 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://lazy30090.github.io/Hugo-stack-lazymuse/tags/cs/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>How to write Hugo Stack articles?</title>
-        <link>https://lazymuse.com/p/how-to-write-hugo-stack-articles/</link>
+        <link>https://lazy30090.github.io/Hugo-stack-lazymuse/p/how-to-write-hugo-stack-articles/</link>
         <pubDate>Tue, 23 Sep 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://lazymuse.com/p/how-to-write-hugo-stack-articles/</guid>
+        <guid>https://lazy30090.github.io/Hugo-stack-lazymuse/p/how-to-write-hugo-stack-articles/</guid>
         <description>&lt;h3 id=&#34;页面包组织&#34;&gt;页面包组织
 &lt;/h3&gt;&lt;p&gt;通常，一篇文章只有一个 Markdown 文件（例如 &lt;code&gt;my-first-post.md&lt;/code&gt;）。但如果想给这篇文章配图，就需要把图片和 Markdown 文件放在同一个文件夹里，然后将这个文件夹作为一个“页面包”来处理。&lt;/p&gt;
 &lt;ul&gt;

@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Pages on lazy</title>
-        <link>https://lazymuse.com/page/</link>
-        <description>Recent content in Pages on lazy</description>
+        <title>Pages on lazymuse</title>
+        <link>https://lazy30090.github.io/Hugo-stack-lazymuse/page/</link>
+        <description>Recent content in Pages on lazymuse</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>lazy</copyright>
-        <lastBuildDate>Fri, 09 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://lazymuse.com/page/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 09 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://lazy30090.github.io/Hugo-stack-lazymuse/page/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Archives</title>
-        <link>https://lazymuse.com/archives/</link>
+        <link>https://lazy30090.github.io/Hugo-stack-lazymuse/archives/</link>
         <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
         
-        <guid>https://lazymuse.com/archives/</guid>
+        <guid>https://lazy30090.github.io/Hugo-stack-lazymuse/archives/</guid>
         <description></description>
         </item>
         <item>
         <title>About</title>
-        <link>https://lazymuse.com/about/</link>
+        <link>https://lazy30090.github.io/Hugo-stack-lazymuse/about/</link>
         <pubDate>Thu, 28 Feb 2019 00:00:00 +0000</pubDate>
         
-        <guid>https://lazymuse.com/about/</guid>
+        <guid>https://lazy30090.github.io/Hugo-stack-lazymuse/about/</guid>
         <description>&lt;p&gt;还没有想好写什么，暂定。&lt;/p&gt;
 </description>
         </item>
         <item>
         <title>Links</title>
-        <link>https://lazymuse.com/links/</link>
+        <link>https://lazy30090.github.io/Hugo-stack-lazymuse/links/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>https://lazymuse.com/links/</guid>
+        <guid>https://lazy30090.github.io/Hugo-stack-lazymuse/links/</guid>
         <description>&lt;p&gt;To use this feature, add &lt;code&gt;links&lt;/code&gt; section to frontmatter.&lt;/p&gt;
 &lt;p&gt;This page&amp;rsquo;s frontmatter:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -61,10 +61,10 @@
         </item>
         <item>
         <title>Search</title>
-        <link>https://lazymuse.com/search/</link>
+        <link>https://lazy30090.github.io/Hugo-stack-lazymuse/search/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>https://lazymuse.com/search/</guid>
+        <guid>https://lazy30090.github.io/Hugo-stack-lazymuse/search/</guid>
         <description></description>
         </item>
         
