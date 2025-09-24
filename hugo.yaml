@@ -1,0 +1,333 @@
+# ------------------------------------------------------------------------------------
+# HUGO 核心配置 (GLOBAL CONFIGURATION)
+# 这些是 Hugo 网站的全局基础设置，与主题无关。
+# ------------------------------------------------------------------------------------
+
+# 网站的最终访问 URL。在生成静态文件时，所有链接都会基于这个地址生成。
+# 必须修改为你自己的域名，否则 CSS、JS 和图片链接可能会出错。
+baseurl: https://lazymuse.com/
+# 网站的默认语言代码，用于 HTML 的 lang 属性等。
+languageCode: en-us
+# 指定你正在使用的主题。Hugo 会在 themes 文件夹下寻找这个主题。
+theme: hugo-theme-stack
+# 网站的全局标题，会显示在浏览器标签页上。
+title: lazymuse
+# 显示在页脚的版权信息。
+copyright: lazy
+
+# ------------------------------------------------------------------------------------
+# 国际化 (INTERNATIONALIZATION - i18n)
+# 用于配置多语言网站。
+# ------------------------------------------------------------------------------------
+
+# 设置网站的默认语言。当用户访问根路径时，会显示这个语言的内容。
+DefaultContentLanguage: en
+
+# 如果你的默认语言是中文、日文或韩文 (CJK)，请设为 true。
+# 这能让 Hugo 正确计算 CJK 字符的文章摘要和字数统计。
+hasCJKLanguage: false
+
+# 定义所有支持的语言及其特定配置。
+languages:
+  # 英语版本的配置
+  en:
+    languageName: English # 语言切换器中显示的名称
+    title: lazy # 该语言下的网站标题
+    weight: 1 # 语言的排序，数字越小越靠前
+    params:
+      sidebar:
+        subtitle: green in tech, lazy in life # 该语言下的侧边栏副标题
+
+# ------------------------------------------------------------------------------------
+# 第三方服务集成 (THIRD-PARTY SERVICES)
+# ------------------------------------------------------------------------------------
+services:
+  # Disqus 评论系统配置
+  disqus:
+    # 填入你在 Disqus 注册的 shortname
+    shortname: "hugo-theme-stack"
+  # 谷歌分析 (Google Analytics) 配置
+  googleAnalytics:
+    # 填入你的 GA Tracking ID，例如 "G-XXXXXXXXXX"
+    id:
+
+# ------------------------------------------------------------------------------------
+# 内容与布局 (CONTENT & LAYOUT)
+# ------------------------------------------------------------------------------------
+
+# 分页设置
+pagination:
+  # 列表页面（如首页、分类页）每页显示的文章数量。
+  pagerSize: 5
+
+# 永久链接（URL）格式定义
+permalinks:
+  # "post" 类型内容的 URL 格式。:slug 会被替换为文章的文件名（不含后缀）。
+  # 示例：/p/my-first-post/
+  post: /p/:slug/
+  # "page" 类型内容的 URL 格式。
+  # 示例：/about/
+  page: /:slug/
+
+# ------------------------------------------------------------------------------------
+# 主题参数 (THEME PARAMS)
+# 这些是 "hugo-theme-stack" 主题特有的配置项。
+# ------------------------------------------------------------------------------------
+params:
+  # 定义哪些内容类型被视为主页上显示的文章列表。默认是 "post"。
+  mainSections:
+    - post
+  # 定义文章 Front Matter 中哪个字段用作特色图片。
+  featuredImageField: image
+  # 如果设为 true，RSS 输出将包含文章全文，否则只包含摘要。
+  rssFullContent: true
+  # 网站的 favicon 图标路径。图标文件需放在 `static` 目录下。
+  # 示例: /favicon.ico
+  favicon:
+
+  # 页脚设置
+  footer:
+    # 版权信息中的起始年份。
+    since: 2025
+    # 在页脚添加额外的自定义文本。
+    customText:
+
+  # 日期显示格式
+  # 格式化遵循 Go 语言的时间模板： "Jan 02, 2006 15:04 MST" 是一个固定参考值。
+  dateFormat:
+    # 文章发布日期的格式
+    published: Jan 02, 2006
+    # 文章最后更新日期的格式
+    lastUpdated: Jan 02, 2006 15:04 MST
+
+  # 侧边栏设置 (全局默认)
+  sidebar:
+    # 显示在侧边栏标题旁的 emoji 图标。
+    emoji: 🌸
+    # 侧边栏副标题。
+    subtitle: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    # 侧边栏头像设置
+    avatar:
+      enabled: true # 是否启用头像
+      local: true # 头像是否为本地文件。设为 false 则 `src` 应为完整的 URL。
+      # 本地头像的路径。文件应放在 `assets/img/` 目录下。
+      src: img/avatar.jpg
+
+  # 文章页面设置
+  article:
+    # 是否启用数学公式渲染 (KaTeX)。
+    math: false
+    # 是否显示文章目录 (Table of Contents)。
+    toc: true
+    # 是否显示预计阅读时间。
+    readingTime: true
+    # 文章许可协议设置
+    license:
+      enabled: true
+      # 默认的许可协议文本。
+      default: Licensed under CC BY-NC-SA 4.0
+
+  # 评论系统设置
+  comments:
+    enabled: true # 是否在文章页面启用评论功能。
+    # 选择要使用的评论提供商。
+    # 可选值: disqus, disqusjs, utterances, beaudar, remark42, vssue, waline, twikoo, cactus, giscus, gitalk, cusdis
+    provider: disqus
+
+    # --- 各个评论提供商的详细配置 ---
+    # 你只需要填写你选择的那个 `provider` 的配置。
+
+    disqusjs:
+      shortname:
+      apiUrl:
+      apiKey:
+      admin:
+      adminLabel:
+
+    utterances:
+      repo:
+      issueTerm: pathname
+      label:
+
+    beaudar:
+      repo:
+      issueTerm: pathname
+      label:
+      theme:
+
+    remark42:
+      host:
+      site:
+      locale:
+
+    vssue:
+      platform:
+      owner:
+      repo:
+      clientId:
+      clientSecret:
+      autoCreateIssue: false
+
+    waline:
+      serverURL:
+      lang:
+      pageview:
+      emoji:
+        - https://unpkg.com/@waline/emojis@1.0.1/weibo
+      requiredMeta:
+        - name
+        - email
+        - url
+      locale:
+        admin: Admin
+        placeholder:
+
+    twikoo:
+      envId:
+      region:
+      path:
+      lang:
+
+    cactus:
+      defaultHomeserverUrl: "https://matrix.cactus.chat:8448"
+      serverName: "cactus.chat"
+      siteName: ""
+
+    giscus:
+      repo:
+      repoID:
+      category:
+      categoryID:
+      mapping:
+      lightTheme:
+      darkTheme:
+      reactionsEnabled: 1
+      emitMetadata: 0
+
+    gitalk:
+      owner:
+      admin:
+      repo:
+      clientID:
+      clientSecret:
+      proxy:
+
+    cusdis:
+      host:
+      id:
+
+  # 小组件 (Widgets) 设置
+  widgets:
+    # 主页侧边栏显示的小组件
+    homepage:
+      - type: search # 搜索框
+      - type: archives # 归档
+        params:
+          limit: 5 # 显示最近 5 个月的归档
+      - type: categories # 分类
+        params:
+          limit: 5 # 显示最多 5 个分类
+      - type: tag-cloud # 标签云
+        params:
+          limit: 10 # 显示最多 10 个标签
+    # 文章和普通页面侧边栏显示的小组件
+    page:
+      - type: toc # 文章目录
+
+
+  # 默认的社交分享图片
+  defaultImage:
+    opengraph:
+      enabled: false
+      local: false
+      src:
+
+  # 颜色主题方案 (暗黑/明亮模式)
+  colorScheme:
+    # 是否显示切换按钮
+    toggle: true
+    # 默认模式: auto (跟随系统), light (明亮), dark (暗黑)
+    default: auto
+
+  # Hugo Pipes 图像处理功能
+  imageProcessing:
+    # 是否处理文章封面图
+    cover:
+      enabled: true
+    # 是否处理文章内容中的图片
+    content:
+      enabled: true
+
+# ------------------------------------------------------------------------------------
+# 菜单 (NAVIGATION MENUS)
+# 定义网站的导航栏。
+# ------------------------------------------------------------------------------------
+menu:
+  # 主导航菜单 (例如：首页、关于、归档)
+  main: []
+
+  # 社交链接菜单 (显示为图标)
+  social:
+    - identifier: github # 唯一标识符
+      name: GitHub # 鼠标悬停时显示的名称
+      url: https://github.com/lazy30090 # 链接地址
+      params:
+        icon: brand-github # Tabler Icon 的图标名称
+
+    - identifier: email
+      name: Email
+      url: mailto:lazy30090@outlook.com
+      params:
+        icon: brand-email
+
+# ------------------------------------------------------------------------------------
+# 相关文章 (RELATED CONTENT)
+# Hugo 内置的相关文章功能配置。
+# ------------------------------------------------------------------------------------
+related:
+  includeNewer: true # 是否包含较新的文章作为相关内容
+  threshold: 60 # 相关度阈值 (0-100)，值越高要求越相关
+  toLower: false # 是否在匹配关键词时忽略大小写
+  # 用于计算相关度的索引
+  indices:
+    - name: tags # 基于标签进行匹配
+      weight: 100 # 权重，权重越高的索引越重要
+    - name: categories # 基于分类进行匹配
+      weight: 200
+
+# ------------------------------------------------------------------------------------
+# MARKDOWN 渲染器配置 (MARKUP CONFIGURATION)
+# ------------------------------------------------------------------------------------
+markup:
+  # Goldmark 渲染器配置 (Hugo 的默认 Markdown 引擎)
+  goldmark:
+    extensions:
+      # 允许在 Markdown 中嵌入 HTML 或 LaTeX 等代码块
+      passthrough:
+        enable: true
+        delimiters:
+          block: # 块级定界符
+            - - \[
+              - \]
+            - - $$
+              - $$
+          inline: # 行内定界符
+            - - \(
+              - \)
+    renderer:
+      # 是否允许不安全的 HTML。如果你的 Markdown 中包含原始 HTML，需设为 true。
+      unsafe: true
+  # 自动生成的文章目录 (TOC) 配置
+  tableOfContents:
+    endLevel: 4 # 目录包含的标题层级结束于 H4
+    ordered: true # 是否使用有序列表 (1. 2. 3.)
+    startLevel: 2 # 目录包含的标题层级开始于 H2
+  # 代码高亮配置
+  highlight:
+    noClasses: false # 设为 false 以使用 CSS 类进行高亮，允许自定义样式
+    codeFences: true # 启用代码围栏 (```)
+    guessSyntax: true # 自动猜测代码语言
+    lineNoStart: 1 # 行号起始数字
+    lineNos: true # 显示行号
+    lineNumbersInTable: true # 使用表格布局来显示行号，避免复制时带上行号
+    tabWidth: 4 # Tab 字符的宽度

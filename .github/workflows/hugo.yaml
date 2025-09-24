@@ -1,0 +1,38 @@
+name: Deploy Hugo Website to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # 当 main 分支有新提交时，触发这个工作流
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          # 这会克隆你的仓库，并确保子模块（例如你的主题）也被拉取
+          submodules: true
+          fetch-depth: 0
+
+      - name: Setup Hugo
+        # 使用一个专门为 Hugo 优化的 Action
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 'latest' # 使用最新版本的 Hugo
+
+      - name: Build Hugo website
+        # 运行 Hugo 命令来生成静态网站，同时进行垃圾回收和清理旧文件
+        run: hugo --gc --cleanDestinationDir
+
+      - name: Deploy to GitHub Pages
+        # 使用一个专门用于部署到 GitHub Pages 的 Action
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          # 自动获取 GitHub Token，用于推送代码
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # 指定要部署的文件夹，也就是 Hugo 生成的 public 文件夹
+          publish_dir: ./public
+          # 指定发布到 gh-pages 分支
+          publish_branch: gh-pages
