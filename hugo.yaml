@@ -5,7 +5,7 @@
 
 # 网站的最终访问 URL。在生成静态文件时，所有链接都会基于这个地址生成。
 # 必须修改为你自己的域名，否则 CSS、JS 和图片链接可能会出错。
-baseurl: https://lazymuse.com/
+baseURL: https://lazy30090.github.io/Hugo-stack-lazymuse/
 # 网站的默认语言代码，用于 HTML 的 lang 属性等。
 languageCode: en-us
 # 指定你正在使用的主题。Hugo 会在 themes 文件夹下寻找这个主题。
@@ -32,7 +32,7 @@ languages:
   # 英语版本的配置
   en:
     languageName: English # 语言切换器中显示的名称
-    title: lazy # 该语言下的网站标题
+    title: lazymuse # 该语言下的网站标题
     weight: 1 # 语言的排序，数字越小越靠前
     params:
       sidebar:
