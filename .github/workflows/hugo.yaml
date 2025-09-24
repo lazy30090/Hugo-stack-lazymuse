@@ -21,6 +21,7 @@ jobs:
         uses: peaceiris/actions-hugo@v2
         with:
           hugo-version: 'latest' # 使用最新版本的 Hugo
+          extended: true         # 明确指定使用 extended 版本
 
       - name: Build Hugo website
         # 运行 Hugo 命令来生成静态网站，同时进行垃圾回收和清理旧文件
