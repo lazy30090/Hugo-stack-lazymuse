@@ -82,8 +82,8 @@ params:
   # 如果设为 true，RSS 输出将包含文章全文，否则只包含摘要。
   rssFullContent: true
   # 网站的 favicon 图标路径。图标文件需放在 `static` 目录下。
-  # 示例: /favicon.ico
-  favicon: /favicon.png
+  # 示例: /favicon.ico (相对与绝对路径问题)
+  favicon: favicon.png
 
   # 页脚设置
   footer:
