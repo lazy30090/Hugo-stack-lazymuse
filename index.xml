@@ -184,6 +184,205 @@
 </description>
         </item>
         <item>
+        <title>PCO Note Part I</title>
+        <link>https://lazy30090.github.io/Hugo-stack-lazymuse/p/pco-note-part-i/</link>
+        <pubDate>Tue, 30 Sep 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://lazy30090.github.io/Hugo-stack-lazymuse/p/pco-note-part-i/</guid>
+        <description>&lt;h1 id=&#34;计算机组成原理第一章&#34;&gt;《计算机组成原理》第一章
+&lt;/h1&gt;&lt;h2 id=&#34;11-计算机的基本概念&#34;&gt;1.1 计算机的基本概念
+&lt;/h2&gt;&lt;h3 id=&#34;111-信息的数字化表示&#34;&gt;1.1.1 信息的数字化表示
+&lt;/h3&gt;&lt;h4 id=&#34;1-基础二进制系统&#34;&gt;1. 基础：二进制系统
+&lt;/h4&gt;&lt;p&gt;计算机内部的所有信息（数值、字符、图像、声音等）都必须转换为二进制序列进行存储和处理。选择二进制是基于以下三个根本原因：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;物理实现的简易性&lt;/strong&gt;：电子元器件（如晶体管）稳定地表示两种状态（如高/低电平、开/关）远比表示多种状态（如十进制的10种）更容易、可靠且成本更低。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;运算规则的简单性&lt;/strong&gt;：二进制的算术运算（加法、乘法）规则极少，这使得构建运算器（ALU）的逻辑电路设计大大简化。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;与逻辑运算的天然契合&lt;/strong&gt;：逻辑代数中的“真”和“假”两种状态，与二进制的“1”和“0”可以完美对应，为计算机处理逻辑判断提供了统一的基础。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-基本单位&#34;&gt;2. 基本单位
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;位 (bit)&lt;/strong&gt;：二进制数中的一位，是计算机中信息的最小单位。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;字节 (Byte)&lt;/strong&gt;：8个比特构成一个字节，是信息存储和传输的基本单位。1 Byte = 8 bits。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3-各类信息的表示&#34;&gt;3. 各类信息的表示
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;数值信息&lt;/strong&gt;：采用“按权展开”法表示。一个二进制数中，任意位置上的“1”所代表的数值是2的相应次幂。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;非数值信息（字符）&lt;/strong&gt;：通过&lt;strong&gt;编码 (Encoding)&lt;/strong&gt; 方案，将字符与一个唯一的二进制数进行映射。
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;ASCII (美国信息交换标准代码)&lt;/strong&gt;：使用7位（后扩展为8位，即1字节）二进制数表示128（或256）个英文字符、数字和符号。这是最基础的西文编码方案。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Unicode 与 UTF-8&lt;/strong&gt;：为解决ASCII无法表示多国语言文字的问题而诞生。
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Unicode&lt;/strong&gt;：一个全球统一的&lt;strong&gt;字符集&lt;/strong&gt;，为世界上每一种语言的每一个字符都分配了一个唯一的数字编号（码点）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;UTF-8&lt;/strong&gt;：一种&lt;strong&gt;编码规则&lt;/strong&gt;，它将Unicode码点转换为实际存储的二进制序列。其特点是&lt;strong&gt;可变长度编码&lt;/strong&gt;，对ASCII字符用1字节表示（实现兼容），对汉字等常用字符用3字节表示，从而兼顾了空间效率和通用性。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;图像信息&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;像素化&lt;/strong&gt;：将图像分割为一个个像素点阵。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;颜色编码&lt;/strong&gt;：用二进制数记录每个像素的颜色信息。例如，24位真彩色使用3个字节（R/G/B各8位）表示一个像素的颜色，可表示约1677万种颜色。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;声音信息&lt;/strong&gt;：将连续的模拟声波数字化。
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;采样&lt;/strong&gt;：在时间轴上以固定频率测量声波的振幅。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;量化&lt;/strong&gt;：将每次采样得到的振幅值近似为一个离散的整数，并用二进制编码。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;4-数字代码的物理表示数字信号&#34;&gt;4. 数字代码的物理表示：数字信号
+&lt;/h4&gt;&lt;p&gt;抽象的二进制代码最终需要通过物理信号在硬件电路中传输。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;数字信号&lt;/strong&gt;：一种离散的、非连续的信号，其状态（如电压）在预定义的几个值之间跳变。对于二进制系统，信号只有两种状态。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;电平表示&lt;/strong&gt;：通过电路中的电压高低来对应二进制的&lt;code&gt;1&lt;/code&gt;和&lt;code&gt;0&lt;/code&gt;。例如，高电平（+3.3V）代表&lt;code&gt;1&lt;/code&gt;，低电平（0V）代表&lt;code&gt;0&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;时序传输&lt;/strong&gt;：在计算机内部**时钟 (Clock)**信号的驱动下，二进制序列按位（bit）在信号线上传输。在每个时钟周期内，发送方输出一个高电平或低电平，接收方在同一时钟周期的特定时刻检测电平，从而还原出二进制序列。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;112-存储程序工作方式&#34;&gt;1.1.2 存储程序工作方式
+&lt;/h3&gt;&lt;p&gt;这是现代计算机体系结构的灵魂，由冯·诺依曼提出，核心思想是：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;将指令和数据以同等地位存放在存储器中，并可按地址寻访。计算机能自动地从存储器中取出指令并执行，直至程序结束。&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;这一思想带来了两大革命性变革：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;自动化&lt;/strong&gt;：计算机可脱离人工干预，高速自动地完成复杂的计算任务。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;通用性&lt;/strong&gt;：计算机的功能不再由其硬件固定，而是取决于加载到内存中的程序。这使得计算机成为一种通用的信息处理工具。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;113-计算机的分类&#34;&gt;1.1.3 计算机的分类
+&lt;/h3&gt;&lt;p&gt;计算机可从不同维度进行分类：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;按处理能力/规模&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;超级计算机&lt;/strong&gt;：用于尖端科学计算，运算速度极快。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;大型机&lt;/strong&gt;：用于处理大量数据和高并发事务，如银行、航空系统。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;服务器&lt;/strong&gt;：为网络中的其他设备提供服务。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;个人计算机 (PC)&lt;/strong&gt;：通用桌面或便携式计算机。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;嵌入式计算机&lt;/strong&gt;：嵌入到特定设备中，执行专门功能的微型计算机。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;按用途&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;通用计算机&lt;/strong&gt;：可解决多种不同类型问题的计算机。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;专用计算机&lt;/strong&gt;：为特定应用领域设计，具有固定功能的计算机。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;12-计算机的诞生与发展&#34;&gt;1.2 计算机的诞生与发展
+&lt;/h2&gt;&lt;h3 id=&#34;121-冯诺依曼体系结构&#34;&gt;1.2.1 冯·诺依曼体系结构
+&lt;/h3&gt;&lt;p&gt;这是为实现“存储程序”思想而设计的硬件体系结构，规定计算机必须由五大基本部件组成：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;运算器 (ALU)&lt;/strong&gt;：执行算术运算和逻辑运算。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;控制器 (CU)&lt;/strong&gt;：负责取指令、分析指令、发出控制信号，是计算机的指挥中心。
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;中央处理器 (CPU)&lt;/strong&gt; 通常指运算器和控制器的集合体。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;存储器 (Memory)&lt;/strong&gt;：存放程序和数据。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;输入设备&lt;/strong&gt;：向计算机输入信息（如键盘、鼠标）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;输出设备&lt;/strong&gt;：向用户展示处理结果（如显示器、打印机）。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;核心特点&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;以CPU为核心。&lt;/li&gt;
+&lt;li&gt;指令和数据不加区分地存放在&lt;strong&gt;同一个&lt;/strong&gt;存储器中。&lt;/li&gt;
+&lt;li&gt;指令和数据的存取都通过&lt;strong&gt;同一条&lt;/strong&gt;总线进行。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;冯·诺依曼瓶颈 (Von Neumann Bottleneck)：&lt;/p&gt;
+&lt;p&gt;由于CPU的运算速度远超存储器的访问速度，且指令和数据需共享同一条总线，导致CPU经常处于等待状态，系统整体性能受到存储器和总线速度的严重制约。主要的缓解方法是引入高速缓存 (Cache)，构建存储器层次结构。&lt;/p&gt;
+&lt;h3 id=&#34;122-计算机发展历程&#34;&gt;1.2.2 计算机发展历程
+&lt;/h3&gt;&lt;p&gt;计算机的发展以核心电子元器件的变革为标志，通常划分为四代：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;第一代 (1946-1957)&lt;/strong&gt;：&lt;strong&gt;电子管&lt;/strong&gt;。体积巨大、功耗高、可靠性差。代表：ENIAC。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;第二代 (1958-1964)&lt;/strong&gt;：&lt;strong&gt;晶体管&lt;/strong&gt;。体积、功耗、成本显著降低，可靠性提升。高级语言和操作系统雏形出现。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;第三代 (1965-1970)&lt;/strong&gt;：&lt;strong&gt;中小规模集成电路 (IC)&lt;/strong&gt;。计算机进一步小型化，性能更强。出现系列化计算机。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;第四代 (1971-至今)&lt;/strong&gt;：&lt;strong&gt;大规模/超大规模集成电路 (LSI/VLSI)&lt;/strong&gt;。催生了**微处理器 (Microprocessor)**和个人计算机 (PC) 的革命。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;123-未来的发展趋势&#34;&gt;1.2.3 未来的发展趋势
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;后摩尔定律时代&lt;/strong&gt;：性能提升从单纯依靠缩小晶体管尺寸，转向依赖更优的架构，如&lt;strong&gt;众核架构&lt;/strong&gt;和&lt;strong&gt;领域专用架构 (DSA)&lt;/strong&gt;（如GPU, NPU）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;新型计算模型&lt;/strong&gt;：如&lt;strong&gt;量子计算&lt;/strong&gt;、&lt;strong&gt;类脑计算/神经形态计算&lt;/strong&gt;和&lt;strong&gt;生物计算&lt;/strong&gt;，旨在突破冯·诺依曼体系的限制。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;计算形态&lt;/strong&gt;：&lt;strong&gt;普适计算&lt;/strong&gt;和&lt;strong&gt;物联网 (IoT)&lt;/strong&gt;，使计算能力无处不在。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;13-计算机系统的组织&#34;&gt;1.3 计算机系统的组织
+&lt;/h2&gt;&lt;p&gt;一个完整的计算机系统由&lt;strong&gt;硬件系统&lt;/strong&gt;和&lt;strong&gt;软件系统&lt;/strong&gt;两部分组成。&lt;/p&gt;
+&lt;h3 id=&#34;131-硬件系统&#34;&gt;1.3.1 硬件系统
+&lt;/h3&gt;&lt;p&gt;计算机的物理实体集合，是软件运行的基础平台。一个典型的计算机硬件系统由以下主要部分构成：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;中央处理器 (CPU)&lt;/strong&gt;：计算机的“大脑”，是执行指令和处理数据的核心部件。内部主要包含：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;运算器 (ALU)&lt;/strong&gt;：负责算术运算和逻辑运算。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;控制器 (CU)&lt;/strong&gt;：负责从内存取指令、译码并发出控制信号，指挥各部件协同工作。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;寄存器 (Registers)&lt;/strong&gt;：CPU内部的高速存储单元，用于暂存指令、数据和地址。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;存储器系统 (Memory System)&lt;/strong&gt;：用于存放程序和数据，通常呈层次化结构：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;高速缓存 (Cache)&lt;/strong&gt;：位于CPU和主存之间，容量小但速度极快，用于缓解“冯诺依曼瓶颈”。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;主存储器 (Main Memory)&lt;/strong&gt;：也称内存（RAM），是CPU能直接访问的存储空间，程序和数据在运行时必须调入内存。特点是易失性（断电后数据丢失）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;辅助存储器 (Secondary Storage)&lt;/strong&gt;：也称外存，如硬盘(HDD)、固态硬盘(SSD)，用于长期存储数据和程序。特点是非易失性（断电后数据不丢失）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;主板 (Motherboard)&lt;/strong&gt;：一块大型电路板，是连接计算机所有硬件组件的骨架。它承载了CPU、内存插槽、扩展插槽（如PCIe），并提供了连接硬盘、电源和各种外部设备的接口。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;输入输出（I/O）设备&lt;/strong&gt;：计算机与外部世界交互的桥梁。
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;输入设备&lt;/strong&gt;：用于向计算机输入信息，如键盘、鼠标、扫描仪、麦克风。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;输出设备&lt;/strong&gt;：用于向用户展示计算机的处理结果，如显示器、打印机、音箱。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;总线 (Bus)&lt;/strong&gt;：连接各个硬件部件并为其提供数据交换路径的公共通信干线。根据传输信息的不同，可分为：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;数据总线 (Data Bus)&lt;/strong&gt;：双向传输数据。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;地址总线 (Address Bus)&lt;/strong&gt;：单向传输，由CPU发出，用于指定访存或I/O端口的地址。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;控制总线 (Control Bus)&lt;/strong&gt;：传输控制信号和时序信号。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;132-软件系统&#34;&gt;1.3.2 软件系统
+&lt;/h3&gt;&lt;p&gt;为运行和管理计算机而编制的程序、数据和文档的总称。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;系统软件&lt;/strong&gt;：管理和控制硬件资源，为应用软件提供运行环境。最核心的是&lt;strong&gt;操作系统 (OS)&lt;/strong&gt;，其他还包括语言处理程序（编译器）、数据库管理系统等。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用软件&lt;/strong&gt;：为满足用户特定需求而开发的程序，如办公软件、浏览器、游戏等。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;133-计算机系统层次结构&#34;&gt;1.3.3 计算机系统层次结构
+&lt;/h3&gt;&lt;p&gt;为了管理计算机的复杂性，计算机系统被组织成一个多层次的结构。每一层都建立在更低一层之上，并向更高一层提供服务，同时隐藏底层实现细节。&lt;/p&gt;
+&lt;p&gt;一个典型的简化层次模型如下（从下至上）：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;硬件层&lt;/strong&gt;：物理设备。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;机器语言层&lt;/strong&gt;：硬件能直接执行的二进制指令。是软硬件的&lt;strong&gt;接口&lt;/strong&gt;，该接口的具体规范称为&lt;strong&gt;指令集体系结构 (Instruction Set Architecture, ISA)&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;操作系统层&lt;/strong&gt;：对硬件功能进行抽象和扩展，管理系统资源。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;高级语言层&lt;/strong&gt;：程序员使用的编程语言，由编译器/解释器翻译成机器语言。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用软件层&lt;/strong&gt;：用户直接交互的程序。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;分层优势&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;解耦 (Decoupling)&lt;/strong&gt;：实现了软硬件的独立发展。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;可移植性 (Portability)&lt;/strong&gt;：软件可在遵循相同接口的不同硬件上运行。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;兼容性 (Compatibility)&lt;/strong&gt;：新硬件只要遵循旧的ISA，就能运行旧的软件。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;14-计算机性能的主要评价指标&#34;&gt;1.4 计算机性能的主要评价指标
+&lt;/h2&gt;&lt;h4 id=&#34;1-根本指标执行时间&#34;&gt;1. 根本指标：执行时间
+&lt;/h4&gt;&lt;p&gt;完成特定任务所耗费的时间（响应时间）。&lt;strong&gt;时间越短，性能越好&lt;/strong&gt;。&lt;/p&gt;
+&lt;h4 id=&#34;2-cpu性能公式&#34;&gt;2. CPU性能公式
+&lt;/h4&gt;&lt;p&gt;一个程序在CPU上的执行时间由以下三个因素决定：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;CPU执行时间 = 指令数 (IC) × 每条指令的平均时钟周期数 (CPI) × 时钟周期时间&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;也可以表示为：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;CPU执行时间 = (指令数 × CPI) / 时钟频率&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;指令数 (IC)&lt;/strong&gt;：完成程序所需的机器指令总数。受&lt;strong&gt;算法&lt;/strong&gt;和&lt;strong&gt;编译器&lt;/strong&gt;优化水平影响。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CPI (Cycles Per Instruction)&lt;/strong&gt;：执行一条指令平均耗费的时钟周期数。反映了&lt;strong&gt;CPU微架构&lt;/strong&gt;的设计水平，是衡量CPU设计优劣的核心指标。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;时钟频率 (主频)&lt;/strong&gt;：CPU的时钟速度，单位Hz。反映了&lt;strong&gt;硬件制造工艺&lt;/strong&gt;水平。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;此公式表明，&lt;strong&gt;高主频不完全等同于高性能&lt;/strong&gt;。一个低主频但CPI更低的CPU，其性能可能超过一个高主频但CPI更高的CPU。&lt;/p&gt;
+&lt;h4 id=&#34;3-其他常用指标&#34;&gt;3. 其他常用指标
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;MIPS (Million Instructions Per Second)&lt;/strong&gt;：每秒执行百万条指令数。易受指令集复杂度影响，不适合跨架构比较。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;FLOPS (Floating-Point Operations Per Second)&lt;/strong&gt;：每秒执行的浮点运算次数。衡量科学计算性能的关键指标。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;基准测试程序 (Benchmark)&lt;/strong&gt;：通过运行一套标准的、公认的测试程序集（如SPEC），来实际测量并综合评价计算机系统在真实应用场景下的性能，是目前最可靠的性能评价方法。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>How to write Hugo Stack articles?</title>
         <link>https://lazy30090.github.io/Hugo-stack-lazymuse/p/how-to-write-hugo-stack-articles/</link>
         <pubDate>Tue, 23 Sep 2025 00:00:00 +0000</pubDate>
