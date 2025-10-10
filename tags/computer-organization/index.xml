@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>UESTC on lazymuse</title>
-        <link>https://lazy30090.github.io/Hugo-stack-lazymuse/categories/uestc/</link>
-        <description>Recent content in UESTC on lazymuse</description>
+        <title>Computer Organization on lazymuse</title>
+        <link>https://lazy30090.github.io/Hugo-stack-lazymuse/tags/computer-organization/</link>
+        <description>Recent content in Computer Organization on lazymuse</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>lazy</copyright>
-        <lastBuildDate>Fri, 10 Oct 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://lazy30090.github.io/Hugo-stack-lazymuse/categories/uestc/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 10 Oct 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://lazy30090.github.io/Hugo-stack-lazymuse/tags/computer-organization/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Computer Organization Note Part II</title>
         <link>https://lazy30090.github.io/Hugo-stack-lazymuse/p/computer-organization-note-part-ii/</link>
         <pubDate>Fri, 10 Oct 2025 00:00:00 +0000</pubDate>
