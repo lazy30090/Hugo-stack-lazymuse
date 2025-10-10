@@ -1,7 +1,7 @@
 ---
 author: "lazy"
 title: "Computer Organization Note Special I"
-date: "2025-10-9"
+date: "2025-10-09"
 description: "计组专题笔记：计算机性能指标计算详解与实例"
 tags:
   - "Computer Organization"

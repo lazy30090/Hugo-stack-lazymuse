@@ -1,7 +1,7 @@
 ---
 author: "lazy"
 title: "Computer Organization Note Part I"
-date: "2025-10-9"
+date: "2025-10-09"
 description: "计组第0章笔记"
 tags:
   - "Computer Organization"
