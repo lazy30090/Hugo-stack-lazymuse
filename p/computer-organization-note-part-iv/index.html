@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="指令系统">
+<title>Computer Organization Note Part IV</title>
+
+<link rel='canonical' href='https://lazy30090.github.io/Hugo-stack-lazymuse/p/computer-organization-note-part-iv/'>
+
+<link rel="stylesheet" href="/Hugo-stack-lazymuse/scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css"><meta property='og:title' content="Computer Organization Note Part IV">
+<meta property='og:description' content="指令系统">
+<meta property='og:url' content='https://lazy30090.github.io/Hugo-stack-lazymuse/p/computer-organization-note-part-iv/'>
+<meta property='og:site_name' content='lazymuse'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Computer Organization' /><meta property='article:published_time' content='2025-10-12T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-10-12T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="Computer Organization Note Part IV">
+<meta name="twitter:description" content="指令系统">
+    <link rel="shortcut icon" href="/Hugo-stack-lazymuse/favicon.png" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/Hugo-stack-lazymuse/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/Hugo-stack-lazymuse/img/avatar_hu_6d1c466aa391b9b9.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🌸</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/Hugo-stack-lazymuse">lazymuse</a></h1>
+            <h2 class="site-description">green in tech, lazy in life</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='mailto:lazy30090@outlook.com'
+                        target="_blank"
+                        title="Email"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 7L10.94 11.3375C11.5885 11.7428 12.4115 11.7428 13.06 11.3375L20 7M5 18H19C20.1046 18 21 17.1046 21 16V8C21 6.89543 20.1046 6 19 6H5C3.89543 6 3 6.89543 3 8V16C3 17.1046 3.89543 18 5 18Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/lazy30090'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/Hugo-stack-lazymuse/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/Hugo-stack-lazymuse/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/Hugo-stack-lazymuse/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/Hugo-stack-lazymuse/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/Hugo-stack-lazymuse/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#引言指令与指令系统">引言：指令与指令系统</a>
+      <ol>
+        <li><a href="#1-计算机中的信息分类">1. 计算机中的信息分类</a></li>
+        <li><a href="#2-计算机的工作步骤">2. 计算机的工作步骤</a></li>
+        <li><a href="#3-指令与指令系统的定义">3. 指令与指令系统的定义</a></li>
+      </ol>
+    </li>
+    <li><a href="#21-指令格式">2.1 指令格式</a>
+      <ol>
+        <li><a href="#1-指令基本格式">1. 指令基本格式</a></li>
+        <li><a href="#2-指令字长">2. 指令字长</a></li>
+        <li><a href="#3-操作码结构">3. 操作码结构</a>
+          <ol>
+            <li><a href="#1-定长操作码">(1) 定长操作码</a></li>
+            <li><a href="#2-扩展操作码">(2) 扩展操作码</a></li>
+            <li><a href="#3-方式码">(3) 方式码</a></li>
+          </ol>
+        </li>
+        <li><a href="#4-指令中的地址结构">4. 指令中的地址结构</a>
+          <ol>
+            <li><a href="#1-操作数的位置">(1) 操作数的位置</a></li>
+            <li><a href="#2-显地址与隐地址">(2) 显地址与隐地址</a></li>
+            <li><a href="#3-按地址码数量分类">(3) 按地址码数量分类</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#22-指令寻址方式-重点与难点">2.2 指令寻址方式 (重点与难点)</a>
+      <ol>
+        <li><a href="#详细解析各种寻址方式">详细解析各种寻址方式</a>
+          <ol>
+            <li><a href="#1-立即寻址-immediate-addressing">(1) 立即寻址 (Immediate Addressing)</a></li>
+            <li><a href="#2-直接寻址类">(2) 直接寻址类</a></li>
+            <li><a href="#3-间接寻址类">(3) 间接寻址类</a></li>
+            <li><a href="#4-变址类-地址计算">(4) 变址类 (地址计算)</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#23-指令类型">2.3 指令类型</a>
+      <ol>
+        <li><a href="#1-指令分类方法">1. 指令分类方法</a></li>
+        <li><a href="#2-按功能分类的指令">2. 按功能分类的指令</a>
+          <ol>
+            <li><a href="#1-传送类指令">(1) 传送类指令</a></li>
+            <li><a href="#2-输入输出-io-指令">(2) 输入/输出 (I/O) 指令</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/Hugo-stack-lazymuse/categories/uestc/" >
+                UESTC
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/Hugo-stack-lazymuse/p/computer-organization-note-part-iv/">Computer Organization Note Part IV</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            指令系统
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Oct 12, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    3 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="引言指令与指令系统">引言：指令与指令系统
+</h2><h3 id="1-计算机中的信息分类">1. 计算机中的信息分类
+</h3><p>计算机是处理信息的工具，其内部处理的信息可以分为两大类：</p>
+<ul>
+<li><strong>数据型信息 (Data)</strong>: 这是计算机程序加工和处理的对象。
+<ul>
+<li><strong>数值型数据</strong>: 如整数、浮点数，用于算术运算。</li>
+<li><strong>非数值型数据</strong>: 如字符、字符串、逻辑值，用于逻辑判断和人机交互。</li>
+</ul>
+</li>
+<li><strong>控制型信息 (Control)</strong>: 这是指导计算机如何操作的命令。
+<ul>
+<li><strong>指令 (Instruction)</strong>: 宏观层面上，CPU能够识别和执行的命令。</li>
+<li><strong>微命令 (Micro-command)</strong>: 微观层面上，构成一条指令的更基本、更底层的控制信号。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-计算机的工作步骤">2. 计算机的工作步骤
+</h3><p>计算机的运行本质上就是周而复始地执行指令序列，其基本工作流程包含三个步骤：</p>
+<ol>
+<li><strong>取指令 (Instruction Fetch)</strong>: CPU根据程序计数器 (PC) 的指示，从主存储器中取出下一条要执行的指令。</li>
+<li><strong>执行指令 (Instruction Execute)</strong>: CPU对指令进行译码，并根据指令要求执行相应的操作（如算术逻辑运算）。在此过程中，可能还需要从主存或寄存器中获取操作数。</li>
+<li><strong>存放结果 (Store Result)</strong>: 将执行指令后得到的结果写回到主存或寄存器中。</li>
+</ol>
+<h3 id="3-指令与指令系统的定义">3. 指令与指令系统的定义
+</h3><ul>
+<li>
+<p><strong>指令 (Instruction)</strong>: 指示计算机执行某种操作的命令。它是一系列按照特定格式排列的二进制代码，CPU可以识别并执行。</p>
+</li>
+<li>
+<p><strong>指令系统 (Instruction Set) / 指令集架构 (ISA)</strong>: 一台计算机所能识别和执行的<strong>全部指令的集合</strong>。它是计算机硬件功能与软件之间的接口，直接反映了CPU所具备的功能。</p>
+</li>
+</ul>
+<h2 id="21-指令格式">2.1 指令格式
+</h2><p>指令格式定义了指令的二进制结构，即哪些位代表什么含义。</p>
+<h3 id="1-指令基本格式">1. 指令基本格式
+</h3><p>一条指令通常包含两部分核心信息：</p>
+<ul>
+<li><strong>操作码 (Opcode, OP)</strong>: 指定了该指令要执行的<strong>操作类型</strong>，如加法、减法、数据传送等。<strong>一条指令中有且仅有一个操作码</strong>。</li>
+<li><strong>地址码 (Address, AD)</strong>: 指定了参与操作的<strong>操作数的位置</strong>或指令执行后<strong>结果的存放位置</strong>。一条指令中可以有0个、1个、2个或3个地址码。</li>
+</ul>
+<p><strong>基本格式:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">+--------------+-----------------+
+</span></span><span class="line"><span class="cl">|   操作码 OP   |     地址码 A     |
+</span></span><span class="line"><span class="cl">+--------------+-----------------+
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="2-指令字长">2. 指令字长
+</h3><p>指令字长是指一条指令所占用的二进制位数。</p>
+<ul>
+<li><strong>优点</strong>: 指令字长越长，可以包含更复杂的操作码和更多的地址信息，从而使指令功能更丰富。</li>
+<li><strong>缺点</strong>: 指令字长越长，会占用更多的存储空间，并且从主存中取指令需要更长的时间，这会降低指令的执行速度。</li>
+</ul>
+<blockquote>
+<p><strong>“瓶颈”问题</strong>: CPU的内部处理速度远快于访问主存储器的速度。例如，一个2GHz的CPU，其内部操作周期约为0.5纳秒 (ns)，而访问一次主存可能需要5纳秒 (ns)，速度相差一个数量级。因此，频繁地访问主存（如取长指令）会成为性能瓶颈。</p></blockquote>
+<h3 id="3-操作码结构">3. 操作码结构
+</h3><p>操作码的位数决定了指令系统能支持多少种不同的操作。</p>
+<h4 id="1-定长操作码">(1) 定长操作码
+</h4><p>所有指令的操作码都具有相同的长度和固定的位置（通常在指令的最高位部分）。这种方式译码简单，但可能会限制指令总数或浪费指令空间。</p>
+<h4 id="2-扩展操作码">(2) 扩展操作码
+</h4><p>指令字长固定，但操作码的长度可变。其核心思想是，让地址码较少的指令拥有更长的操作码，从而在不增加指令总长度的前提下，支持更多的指令类型。</p>
+<p><strong>示例</strong>: 假设指令字长为16位，地址码每个占4位。设计一个支持15条三地址指令、15条二地址指令、15条一地址指令和16条零地址指令的系统。</p>
+<ul>
+<li><strong>三地址指令 (15条)</strong>
+<ul>
+<li><code>OP(4位) | A1(4位) | A2(4位) | A3(4位)</code></li>
+<li>操作码 <code>0000</code> 到 <code>1110</code> (15条)。</li>
+<li><code>1111</code> 作为<strong>扩展标志</strong>，表示这不是一条三地址指令。</li>
+</ul>
+</li>
+<li><strong>二地址指令 (15条)</strong>
+<ul>
+<li><code>1111 | OP'(4位) | A1(4位) | A2(4位)</code></li>
+<li>前4位 <code>1111</code> 表示扩展。</li>
+<li>OP&rsquo; 从 <code>0000</code> 到 <code>1110</code> (15条)。</li>
+<li><code>1111 1111</code> 作为下一级的扩展标志。</li>
+</ul>
+</li>
+<li><strong>一地址指令 (15条)</strong>
+<ul>
+<li><code>1111 | 1111 | OP''(4位) | A1(4位)</code></li>
+<li>前8位 <code>1111 1111</code> 表示扩展。</li>
+<li>OP&rsquo;&rsquo; 从 <code>0000</code> 到 <code>1110</code> (15条)。</li>
+<li><code>1111 1111 1111</code> 作为下一级的扩展标志。</li>
+</ul>
+</li>
+<li><strong>零地址指令 (16条)</strong>
+<ul>
+<li><code>1111 | 1111 | 1111 | OP'''(4位)</code></li>
+<li>前12位 <code>1111 1111 1111</code> 表示扩展。</li>
+<li>OP&rsquo;&rsquo;&rsquo; 从 <code>0000</code> 到 <code>1111</code> (16条)，这里不再需要扩展标志，所以4位可以全部用来编码。</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-方式码">(3) 方式码
+</h4><p>将操作码字段划分为几个部分，每个部分代表一种操作属性或方式。例如，一个算术逻辑指令的操作码可以分为：基本操作、是否影响进位、是否移位、结果是否回送等部分。</p>
+<h3 id="4-指令中的地址结构">4. 指令中的地址结构
+</h3><h4 id="1-操作数的位置">(1) 操作数的位置
+</h4><p>操作数可以存放在：</p>
+<ul>
+<li><strong>CPU内部寄存器</strong>: 访问速度最快。</li>
+<li><strong>主存储器 (包括Cache)</strong>: 速度次之。</li>
+<li><strong>外存</strong>: 速度最慢，CPU不能直接访问，需先调入内存。</li>
+<li><strong>堆栈 (Stack)</strong>: 一种特殊的内存区域，按“后进先出”(LIFO)原则组织数据。</li>
+</ul>
+<h4 id="2-显地址与隐地址">(2) 显地址与隐地址
+</h4><ul>
+<li><strong>显地址 (Explicit Address)</strong>: 在指令中明确地给出了操作数的地址（如内存单元号或寄存器编号）。</li>
+<li><strong>隐地址 (Implicit Address)</strong>: 指令中不给出地址，而是通过系统事先的约定来确定操作数的位置。例如，约定累加器(AC)总是作为其中一个操作数和结果的存放地。使用隐地址是<strong>简化地址结构、缩短指令长度</strong>的基本途径。</li>
+</ul>
+<h4 id="3-按地址码数量分类">(3) 按地址码数量分类
+</h4><ul>
+<li><strong>四地址指令</strong>: <code>OP | A1 | A2 | A3 | A4</code>
+<ul>
+<li>功能: <code>(A1) OP (A2) -&gt; A3</code>, <code>下一条指令在A4</code></li>
+<li>非常罕见，因为程序通常是顺序执行的，A4大部分情况下是多余的。</li>
+</ul>
+</li>
+<li><strong>三地址指令</strong>: <code>OP | A1 | A2 | A3</code>
+<ul>
+<li>功能: <code>(A1) OP (A2) -&gt; A3</code></li>
+<li>下一条指令地址由<strong>程序计数器(PC)</strong> 隐含提供: <code>(PC) + n -&gt; PC</code>。</li>
+</ul>
+</li>
+<li><strong>二地址指令</strong>: <code>OP | A1 | A2</code>
+<ul>
+<li>功能: <code>(A1) OP (A2) -&gt; A1</code> (或 A2)。结果覆盖其中一个操作数。</li>
+<li>这是最常见的指令格式之一，如 <code>ADD AX, BX</code>。</li>
+</ul>
+</li>
+<li><strong>一地址指令</strong>: <code>OP | A1</code>
+<ul>
+<li><strong>双操作数指令</strong>: 一个操作数在A1，另一个操作数隐含在累加器(AC)中。功能: <code>(A1) OP (AC) -&gt; AC</code>。</li>
+<li><strong>单操作数指令</strong>: 只对A1处的一个操作数进行操作。功能: <code>OP(A1) -&gt; A1</code>，如 <code>NOT BL</code> (按位取反)。</li>
+</ul>
+</li>
+<li><strong>零地址指令</strong>: <code>OP</code>
+<ul>
+<li>不含地址码。操作数通常隐含在<strong>堆栈的顶部</strong>。例如，<code>PUSH</code> 和 <code>POP</code> 指令。</li>
+<li>也包括一些不需要操作数的指令，如 <code>NOP</code> (空操作) 和 <code>HLT</code> (停机)。</li>
+</ul>
+</li>
+</ul>
+<h2 id="22-指令寻址方式-重点与难点">2.2 指令寻址方式 (重点与难点)
+</h2><p><strong>寻址方式</strong>定义了指令中的地址码字段应该如何解释，以最终找到所需的操作数。### 四大类寻址方式</p>
+<ol>
+<li>
+<p><strong>立即寻址</strong>: 指令中直接包含操作数本身。</p>
+</li>
+<li>
+<p><strong>直接寻址类</strong>: 指令中直接给出操作数的地址（主存单元号或寄存器号）。</p>
+</li>
+<li>
+<p><strong>间接寻址类</strong>: 指令中给出的是一个地址指针，需要通过该指针再次访问才能找到操作数。</p>
+</li>
+<li>
+<p><strong>变址类</strong>: 指令中给出的地址需要和某个寄存器的内容相加，才能得到最终的有效地址。</p>
+</li>
+</ol>
+<h3 id="详细解析各种寻址方式">详细解析各种寻址方式
+</h3><h4 id="1-立即寻址-immediate-addressing">(1) 立即寻址 (Immediate Addressing)
+</h4><ul>
+<li><strong>定义</strong>: 地址码字段给出的不是地址，而是<strong>操作数本身</strong>。</li>
+<li><strong>优点</strong>: 取出指令的同时就获得了操作数，无需再次访存，速度快。</li>
+<li><strong>缺点</strong>: 操作数大小受到地址码位数的限制。</li>
+<li><strong>示例</strong>: <code>MOV AX, 1234H</code> (将立即数<code>1234H</code>送入AX寄存器)。</li>
+</ul>
+<h4 id="2-直接寻址类">(2) 直接寻址类
+</h4><ul>
+<li><strong>主存直接寻址</strong>: 指令中直接给出操作数在<strong>主存中的有效地址</strong>。
+<ul>
+<li><strong>优点</strong>: 简单直观。</li>
+<li><strong>缺点</strong>: 地址码位数决定了可寻址空间的大小，灵活性差。</li>
+<li><strong>关系</strong>: <code>操作数 = (A)</code>，其中 A 是指令中给出的地址。</li>
+<li><strong>示例</strong>: <code>MOV AX, [2000H]</code> (将内存地址<code>2000H</code>单元的内容送入AX)。</li>
+</ul>
+</li>
+<li><strong>寄存器寻址</strong>: 指令中直接给出操作数所在的<strong>寄存器编号</strong>。
+<ul>
+<li><strong>优点</strong>: 无需访问主存，速度极快；寄存器数量少，地址码短，指令长度也短。这是现代CPU提高性能的重要手段。</li>
+<li><strong>关系</strong>: <code>操作数 = (Ri)</code>，其中 Ri 是指令中指定的寄存器。</li>
+<li><strong>示例</strong>: <code>MOV AX, BX</code> (将BX寄存器的内容送入AX)。</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-间接寻址类">(3) 间接寻址类
+</h4><ul>
+<li><strong>主存间接寻址</strong>: 指令中给出的地址是<strong>存放操作数地址的内存单元的地址</strong>。
+<ul>
+<li><strong>过程</strong>: 需要两次访问主存才能获得操作数。</li>
+<li><strong>优点</strong>: 扩大了寻址范围（地址码位数不变，但可以指向更大的地址空间），便于编程（如实现指针）。</li>
+<li><strong>关系</strong>: <code>有效地址 = (A)</code>, <code>操作数 = ((A))</code>。</li>
+<li><strong>示例</strong>: 指令地址码为<code>2000H</code>，<code>2000H</code>单元内容为<code>3000H</code>，<code>3000H</code>单元内容为<code>AC00H</code>。最终得到的操作数是<code>AC00H</code>。</li>
+</ul>
+</li>
+<li><strong>寄存器间接寻址</strong>: 指令中给出寄存器编号，该<strong>寄存器中存放的是操作数的有效地址</strong>。
+<ul>
+<li><strong>过程</strong>: 访问1次寄存器和1次主存。</li>
+<li><strong>优点</strong>: 结合了寄存器寻址的速度和间接寻址的灵活性。</li>
+<li><strong>关系</strong>: <code>有效地址 = (Ri)</code>, <code>操作数 = ((Ri))</code>。</li>
+<li><strong>示例</strong>: <code>MOV AX, [BX]</code> (将DS段中，由BX寄存器内容所指向的内存单元的数据送入AX)。</li>
+</ul>
+</li>
+<li><strong>自增/自减型寄存器间址</strong>:
+<ul>
+<li><strong>自增型 <code>(R)+</code></strong>: 先按寄存器内容寻址，获取操作数后，再将寄存器内容自动加1（或一个字长）。常用于处理连续数据块。</li>
+<li><strong>自减型 <code>-(R)</code></strong>: 先将寄存器内容自动减1（或一个字长），再按新的寄存器内容寻址。</li>
+</ul>
+</li>
+<li><strong>堆栈寻址</strong>:
+<ul>
+<li>操作数隐含在堆栈顶部。地址由<strong>堆栈指针寄存器(SP)</strong> 给出。</li>
+<li><strong>压栈 (PUSH)</strong>: <code>(SP) - 1 -&gt; SP</code>, <code>数据 -&gt; ((SP))</code> (先移动指针，再存数据)。</li>
+<li><strong>弹栈 (POP)</strong>: <code>数据 &lt;- ((SP))</code>, <code>(SP) + 1 -&gt; SP</code> (先取数据，再移动指针)。</li>
+<li>这是一种特殊的寄存器间址方式。</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-变址类-地址计算">(4) 变址类 (地址计算)
+</h4><p>这类寻址方式的<strong>有效地址 (EA)</strong> 是由指令中给出的<strong>形式地址D</strong>和某个寄存器的内容计算得出的。</p>
+<ul>
+<li>
+<p><strong>变址寻址</strong>: <code>EA = (Rx) + D</code></p>
+<ul>
+<li>
+<p><strong>Rx</strong>: 变址寄存器 (如SI, DI)，内容可变，通常用于访问数组或字符串中的元素。</p>
+</li>
+<li>
+<p><strong>D</strong>: 形式地址，是基准量，固定不变。</p>
+</li>
+<li>
+<p><strong>面向用户</strong>，用于处理成批数据。</p>
+</li>
+<li>
+<p><strong>示例</strong>: <code>MOV AX, 10H[SI]</code> (EA = (SI) + 10H)。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="23-指令类型">2.3 指令类型
+</h2><h3 id="1-指令分类方法">1. 指令分类方法
+</h3><ul>
+<li><strong>按指令格式分类</strong>: 双操作数、单操作数指令等。</li>
+<li><strong>按寻址方式分类</strong>: RR型 (寄存器-寄存器)、RX型 (寄存器-内存) 等。</li>
+<li><strong>按指令功能分类</strong>: 这是最常用、最重要的方法。</li>
+</ul>
+<h3 id="2-按功能分类的指令">2. 按功能分类的指令
+</h3><h4 id="1-传送类指令">(1) 传送类指令
+</h4><ul>
+<li><strong>一般传送指令 (MOV, LOAD, STORE)</strong>: 在寄存器之间、寄存器与内存之间、内存与内存之间（通常不直接支持）传送数据。</li>
+<li><strong>堆栈指令 (PUSH, POP)</strong>: 对堆栈进行压入和弹出操作。</li>
+<li><strong>数据交换指令 (XCHG)</strong>: 交换两个操作数的内容。</li>
+</ul>
+<h4 id="2-输入输出-io-指令">(2) 输入/输出 (I/O) 指令
+</h4><p>用于主机与外设之间的数据交换，本质上也是一种传送指令。</p>
+<ul>
+<li><strong>外围设备编址方式</strong>:
+<ol>
+<li><strong>单独编址 (Isolated I/O)</strong>:
+<ul>
+<li>I/O设备拥有独立的地址空间，称为<strong>端口地址</strong>。</li>
+<li>需要专用的I/O指令 (如 <code>IN</code>, <code>OUT</code>) 来访问。</li>
+<li><strong>优点</strong>: I/O操作与内存操作易于区分，不占用内存地址空间。</li>
+<li><strong>缺点</strong>: 需要额外的控制信号线 (I/O Read, I/O Write)。</li>
+</ul>
+</li>
+<li><strong>统一编址 (Memory-Mapped I/O)</strong>:
+<ul>
+<li>将I/O设备的接口寄存器看作主存单元，分配主存地址。</li>
+<li>可以使用通用的数据传送指令 (如 <code>MOV</code>) 来访问I/O设备。</li>
+<li><strong>优点</strong>: 指令类型更少，寻址方式更灵活。</li>
+<li><strong>缺点</strong>: 占用主存地址空间。</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><strong>I/O指令的设置方法</strong>:
+<ol>
+<li><strong>设置专用I/O指令</strong>: 对应单独编址方式，如 <code>IN AL, 20H</code> (从端口20H读一字节到AL)。</li>
+<li><strong>采用通用数据传送指令</strong>: 对应统一编址方式。</li>
+<li><strong>通过I/O处理器</strong>: CPU向I/O处理器发送通用的命令字，由I/O处理器解释并执行具体的外设操作。</li>
+</ol>
+</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/Hugo-stack-lazymuse/tags/computer-organization/">Computer Organization</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/Hugo-stack-lazymuse/p/computer-organization-note-part-iii/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Computer Organization Note Part III</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/Hugo-stack-lazymuse/p/computer-organization-note-part-ii/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Computer Organization Note Part II</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/Hugo-stack-lazymuse/p/computer-organization-note-special-ii/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Computer Organization Note Special II</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/Hugo-stack-lazymuse/p/computer-organization-note-part-i/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Computer Organization Note Part I</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/Hugo-stack-lazymuse/p/computer-organization-note-special-i/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Computer Organization Note Special I</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 lazy
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.31.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/Hugo-stack-lazymuse/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

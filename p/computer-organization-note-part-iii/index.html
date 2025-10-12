@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="卡诺图">
+<title>Computer Organization Note Part III</title>
+
+<link rel='canonical' href='https://lazy30090.github.io/Hugo-stack-lazymuse/p/computer-organization-note-part-iii/'>
+
+<link rel="stylesheet" href="/Hugo-stack-lazymuse/scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css"><meta property='og:title' content="Computer Organization Note Part III">
+<meta property='og:description' content="卡诺图">
+<meta property='og:url' content='https://lazy30090.github.io/Hugo-stack-lazymuse/p/computer-organization-note-part-iii/'>
+<meta property='og:site_name' content='lazymuse'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Computer Organization' /><meta property='article:published_time' content='2025-10-11T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-10-11T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="Computer Organization Note Part III">
+<meta name="twitter:description" content="卡诺图">
+    <link rel="shortcut icon" href="/Hugo-stack-lazymuse/favicon.png" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/Hugo-stack-lazymuse/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/Hugo-stack-lazymuse/img/avatar_hu_6d1c466aa391b9b9.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🌸</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/Hugo-stack-lazymuse">lazymuse</a></h1>
+            <h2 class="site-description">green in tech, lazy in life</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='mailto:lazy30090@outlook.com'
+                        target="_blank"
+                        title="Email"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 7L10.94 11.3375C11.5885 11.7428 12.4115 11.7428 13.06 11.3375L20 7M5 18H19C20.1046 18 21 17.1046 21 16V8C21 6.89543 20.1046 6 19 6H5C3.89543 6 3 6.89543 3 8V16C3 17.1046 3.89543 18 5 18Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/lazy30090'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/Hugo-stack-lazymuse/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/Hugo-stack-lazymuse/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/Hugo-stack-lazymuse/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/Hugo-stack-lazymuse/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/Hugo-stack-lazymuse/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#基本规则必须完全掌握">基本规则（必须完全掌握）</a></li>
+    <li><a href="#实操要点--易错点总结">实操要点 / 易错点（总结）</a></li>
+    <li><a href="#例子-1--3-变量最直接说明圈与结果的规则">例子 1 — <strong>3 变量</strong>（最直接、说明圈与结果的规则）</a></li>
+    <li><a href="#例子-2--4-变量含-dont-care-的实用示例说明如何利用-d-扩大圈并得到更少的项">例子 2 — <strong>4 变量</strong>（含 <code>don&#39;t-care</code> 的实用示例：说明如何利用 d 扩大圈并得到更少的项）</a>
+      <ol>
+        <li><a href="#1-把最小项与-d-填入-k-图表格化表示">1) 把最小项与 d 填入 K 图（表格化表示）</a></li>
+        <li><a href="#2-寻找并圈出尽可能大的-2k-相邻块允许使用-d-作为-1">2) 寻找并圈出尽可能大的 2^k 相邻块（允许使用 d 作为 1）</a></li>
+        <li><a href="#3-写出化简表达式把每个圈对应的乘积项求或">3) 写出化简表达式（把每个圈对应的乘积项求或）</a></li>
+        <li><a href="#4-验证直观检查覆盖了所有原始-1">4) 验证（直观检查覆盖了所有原始 1）</a></li>
+      </ol>
+    </li>
+    <li><a href="#如何把圈直接转成代数项快速记法">如何把“圈”直接转成代数项（快速记法）</a></li>
+    <li><a href="#关于本质素蕴涵项essential-prime-implicant的补充用于判定谁必须被选">关于“本质素蕴涵项（Essential Prime Implicant）”的补充（用于判定谁必须被选）</a></li>
+    <li><a href="#练习建议如何练好卡诺图化简">练习建议（如何练好卡诺图化简）</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/Hugo-stack-lazymuse/categories/uestc/" >
+                UESTC
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/Hugo-stack-lazymuse/p/computer-organization-note-part-iii/">Computer Organization Note Part III</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            卡诺图
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Oct 11, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    4 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="计算机组成原理卡诺图">《计算机组成原理》：卡诺图
+</h1><p>概念回顾（为什么用卡诺图）</p>
+<ul>
+<li>卡诺图是一种以图形方式表示 n 变量逻辑函数最小项（minterm）并进行化简的方法。</li>
+<li>通过把逻辑上“相邻”的最小项在几何位置上也安排相邻，可以直观地找到可以合并的项（消去变量），从而得到更简的与-或（积之和）形式。</li>
+<li>目标：用尽可能少、尽可能大的“卡诺圈”覆盖所有值为 1 的小格，得到最简或接近最简的表达式（最小项数量少、每项变量数少、并考虑成本与实现）。</li>
+</ul>
+<hr>
+<h2 id="基本规则必须完全掌握">基本规则（必须完全掌握）
+</h2><ol>
+<li><strong>格子与编号</strong>
+<ul>
+<li>n 变量共有 <code>2^n</code> 个最小项，对应 <code>2^n</code> 个小方格。格子的二进制标号按 <strong>格雷码（Gray code）</strong> 排列（使相邻格子的编号只有一位不同）。</li>
+<li>常见布局：
+<ul>
+<li>2 变量：2×2；</li>
+<li>3 变量：2 行×4 列（行表示最高位，列为两低位的格雷码顺序 00,01,11,10）；</li>
+<li>4 变量：4 行×4 列（行、列均为两位格雷码：00,01,11,10）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>圈的大小</strong>
+<ul>
+<li>只能圈 <code>2^k</code>（k = 0,1,2,&hellip;）个相邻格子（即 1、2、4、8…）。</li>
+<li>圈必须是矩形（允许正方形）并且边界可“环绕”（图两边相邻，称 wrap-around），例如最左列与最右列相邻；最上行与最下行相邻。</li>
+</ul>
+</li>
+<li><strong>圈的原则</strong>
+<ul>
+<li>优先圈 <strong>尽可能大的</strong> 2^k 个相邻的 <code>1</code>（越大消去的变量越多）。</li>
+<li>每一个 <code>1</code> 必须至少被<strong>一个</strong>圈覆盖（但每个 <code>1</code> 可以被多个圈覆盖）。</li>
+<li><strong>每个圈至少要包含一个“独立的 1”</strong>（essential 1/独立 1），否则该圈可能是多余的（避免多余项）。</li>
+<li>圈的数量应尽可能少，且尽可能覆盖更多 <code>1</code>（使表达式项数最少）。</li>
+</ul>
+</li>
+<li><strong>如何从圈得到乘积项（与项）</strong>
+<ul>
+<li>在圈中，找出在圈内不发生变化（始终为 0 或始终为 1）的变量。</li>
+<li>若变量在圈内恒为 1，则在乘积项中保留该变量（原变量）；若恒为 0，则在乘积项中保留该变量的反（补）形式；若变量在圈内既 0 又 1（发生变化），则该变量在乘积项中被<strong>消去</strong>（不出现）。</li>
+<li>最后把所有圈得到的乘积项作或（相加）就是化简后的与-或式（积之和）。</li>
+</ul>
+</li>
+<li><strong><code>don't-care</code>（无关项）的处理</strong>
+<ul>
+<li><code>don't-care</code>（通常用 <code>d</code> 表示）是指某些输入组合在实际应用中不会出现或其输出不关心，这些格子在 K 图中既可以按 1 看待也可以按 0 看待，用来<strong>帮助形成更大的圈</strong>以获得更简的解。</li>
+<li>规则：在圈时<strong>可以把 d 当作 1 使用以扩大圈</strong>，但最终表达式不需要为 d 单独输出（即不强制要求包含 d）。</li>
+</ul>
+</li>
+<li><strong>最简式可能不唯一</strong>
+<ul>
+<li>不同的圈法可能产生不同但等价的最简表达式；因此出现多解是正常的。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="实操要点--易错点总结">实操要点 / 易错点（总结）
+</h2><ul>
+<li>列/行必须按 <strong>格雷码</strong> 排列（否则相邻概念失效）。</li>
+<li>圈只能是 2 的次方个格子，且要成矩形（不能 L 形）。</li>
+<li>圈可以重叠；合理重叠能减少项数。</li>
+<li><code>1</code> 必须被覆盖，但不要为了覆盖而生成冗余的圈（优先圈必需的“本质素蕴涵项”）。</li>
+<li>使用 <code>don't-care</code> 时小心：把 d 当 1 用是为了简化，但如果不必要就不要把它当 1；d 的使用只为取得更大圈、更多消去变量。</li>
+<li>最后要逐个最小项核对（用代数或真值表）确保化简后的表达式覆盖所有原始为 1 的输入。</li>
+</ul>
+<hr>
+<h2 id="例子-1--3-变量最直接说明圈与结果的规则">例子 1 — <strong>3 变量</strong>（最直接、说明圈与结果的规则）
+</h2><p><strong>定义</strong>：令三个变量为 <code>A,B,C</code>（A 为最高位）。
+设函数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">F(A,B,C) = Σ m(1,3,5,7)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>（即当输入为 001、011、101、111 时输出为 1）</p>
+<p><strong>步骤</strong>：</p>
+<ol>
+<li>画 3-变量 K 图（2 行 × 4 列），列的 BC 顺序为 <code>00,01,11,10</code>（格雷码），行 A 为 <code>0</code>（上）与 <code>1</code>（下）。</li>
+<li>标出 1 的格子：m1(001)、m3(011)、m5(101)、m7(111) —— 这四个格子恰好是**两列的同一列（列对应 C=1）**的上下两个单元：实际上这 4 个都是 C = 1 的组合（不论 A、B 为何）。</li>
+<li>围成<strong>一个 4 格的列圈</strong>（最大可能），该圈覆盖所有四个 1。</li>
+<li>从圈中看变量不变的：<code>C</code> 在圈中恒为 <code>1</code>（列固定），而 <code>A</code>、<code>B</code> 在圈内变化（被消去）。</li>
+<li>因此乘积项为 <code>C</code>。 最终：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">F = C
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>结论/说明</strong>：这个例子演示了“把尽可能多的 1 包成大圈”能直接消去多数变量，得到极简表达式。</p>
+<hr>
+<h2 id="例子-2--4-变量含-dont-care-的实用示例说明如何利用-d-扩大圈并得到更少的项">例子 2 — <strong>4 变量</strong>（含 <code>don't-care</code> 的实用示例：说明如何利用 d 扩大圈并得到更少的项）
+</h2><p>设 4 个变量为 <code>A,B,C,D</code>（<code>AB</code> 行、<code>CD</code> 列，行/列的顺序均为格雷码 <code>00,01,11,10</code>）。
+定义函数（示例）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">F(A,B,C,D) = Σ m(0,2,5,7,8,10)
+</span></span><span class="line"><span class="cl">don&#39;t-care d = Σ m(1,3,9,11)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="1-把最小项与-d-填入-k-图表格化表示">1) 把最小项与 d 填入 K 图（表格化表示）
+</h3><p>下面给出 K-map 的排列（行 = AB：00 / 01 / 11 / 10；列 = CD：00 / 01 / 11 / 10）并标注 minterm 编号：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">K-map index layout (rows AB, cols CD):
+</span></span><span class="line"><span class="cl">       CD
+</span></span><span class="line"><span class="cl">       00   01   11   10
+</span></span><span class="line"><span class="cl">AB
+</span></span><span class="line"><span class="cl">00     m0   m1   m3   m2
+</span></span><span class="line"><span class="cl">01     m4   m5   m7   m6
+</span></span><span class="line"><span class="cl">11     m12  m13  m15  m14
+</span></span><span class="line"><span class="cl">10     m8   m9   m11  m10
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>将给定的 1 / d 填入（X 表示 1， d 表示 don&rsquo;t-care，空白为 0）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">       CD
+</span></span><span class="line"><span class="cl">       00   01   11   10
+</span></span><span class="line"><span class="cl">AB
+</span></span><span class="line"><span class="cl">00     X    d    d    X     (m0=1, m1=d, m3=d, m2=1)
+</span></span><span class="line"><span class="cl">01     .    X    X    .     (m4=., m5=1, m7=1, m6=.)
+</span></span><span class="line"><span class="cl">11     .    .    .    .     (m12..m15 all 0 / not used here)
+</span></span><span class="line"><span class="cl">10     X    d    d    X     (m8=1, m9=d, m11=d, m10=1)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>（<code>.</code> 表示 0 / 空）</p>
+<h3 id="2-寻找并圈出尽可能大的-2k-相邻块允许使用-d-作为-1">2) 寻找并圈出尽可能大的 2^k 相邻块（允许使用 d 作为 1）
+</h3><ul>
+<li><strong>目标</strong>：用尽量少且尽量大的圈覆盖所有 X（真实的 1），可以把 d 看作 1 以便扩大圈。</li>
+</ul>
+<p><strong>圈法建议与选择</strong>：</p>
+<ol>
+<li>可以把左上 2×2（由 m0, m1(d), m8, m9(d) 组成）圈成一个 4 格（cover m0 &amp; m8 plus d&rsquo;s）。这个圈对应 <code>B' C'</code>（见下文推导）。</li>
+<li>类似地，把右下两列（col <code>11</code> 与 <code>10</code>）在上/下合并利用 d，或把 m2、m10 与相邻的 d（m3、m11）围成 4 格，得到 <code>B' C</code>。</li>
+<li>对 m5、m7（位于 AB=01 行，列 01 和 11）可以圈成一个 1×2 的横向圈（这将保留 A&rsquo;·B·D，因为 D=1 恒定，A&rsquo;=1 恒定，B=1 恒定），也可以检查是否有更大的圈通过别的 d 扩大（此示例中 m5 与 m7 最简是由 A&rsquo;·B·D 覆盖）。</li>
+</ol>
+<p>下面给出一个<strong>合理的最简覆盖</strong>（示范）：</p>
+<ul>
+<li><strong>圈 A（4 格）</strong>：覆盖 m0, m1(d), m8, m9(d) → 形成一个 2×2 块（左上与左下两行、左两列）。
+<ul>
+<li>在该圈中：
+<ul>
+<li>对列（CD）来看，列为 <code>00</code> 与 <code>01</code>，它们的 C 位均为 <code>0</code>（C = 0 恒定），D 变化 → D 被消去；</li>
+<li>对行（AB）来看，行为 <code>00</code> 与 <code>10</code>，对应 B = 0 恒定（A 变化） → A 被消去，B = 0 成为常量（记作 B&rsquo;）。</li>
+</ul>
+</li>
+<li>因此乘积项为 <code>B' C'</code>（B=0 → B&rsquo;，C=0 → C&rsquo;）。</li>
+</ul>
+</li>
+<li><strong>圈 B（4 格）</strong>：覆盖 m2, m3(d), m10, m11(d) → 形成右侧两列同样的 2×2 块。
+<ul>
+<li>在该圈中：列为 <code>11</code> 与 <code>10</code>（两列均有 C = 1 恒定），行为 <code>00</code> 与 <code>10</code>（B = 0 恒定），得到 <code>B' C</code>。
+-（注意：如果不使用 d，则可能需要两个 1×1 或 1×2 的小圈；使用 d 能把它们合并为更大圈，从而消去更多变量。）</li>
+</ul>
+</li>
+<li><strong>圈 C（2 格）</strong>：覆盖 m5 与 m7（AB = 01 行，CD = 01 与 11 两列）
+<ul>
+<li>在该圈中：行固定为 <code>01</code> → A = 0（A&rsquo;），B = 1；列两格 CD=01 与 CD=11 对应 D = 1 恒定、C 变化 → C 被消去，D 保留。</li>
+<li>乘积项为 <code>A' B D</code>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-写出化简表达式把每个圈对应的乘积项求或">3) 写出化简表达式（把每个圈对应的乘积项求或）
+</h3><p>将上面三圈对应的乘积项相加：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">F = B&#39; C&#39;  +  B&#39; C  +  A&#39; B D
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>注意：<code>B' C' + B' C = B' (C' + C) = B'</code>，因此可以进一步化简：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">F = B&#39;  +  A&#39; B D
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="4-验证直观检查覆盖了所有原始-1">4) 验证（直观检查覆盖了所有原始 1）
+</h3><ul>
+<li><code>B'</code> 覆盖了所有 B = 0 的情况（AB 行 00 与 10），即包含 m0, m2, m8, m10（以及包含在 d 的格子），这些都是原始的 1。</li>
+<li><code>A' B D</code> 覆盖 AB=01 且 D=1 的格子，即 m5、m7。</li>
+<li>因此所有原始的 1（m0,m2,m5,m7,m8,m10）都被覆盖，且没有需要单独覆盖的遗留 1。表达式正确且更简。</li>
+</ul>
+<hr>
+<h2 id="如何把圈直接转成代数项快速记法">如何把“圈”直接转成代数项（快速记法）
+</h2><ul>
+<li>找圈 → 找该圈中不变（恒 0 或恒 1）的变量 → 转成乘积：
+<ul>
+<li>恒为 1 → 写出该变量（不补）。</li>
+<li>恒为 0 → 写出该变量的反（<code>'</code> 或 <code>¯</code> 表示）。</li>
+<li>在圈内变化（既有 0 又有 1）→ 该变量不出现。</li>
+</ul>
+</li>
+<li>例如：圈里若 <code>A</code> 固定为 0，<code>B</code> 固定为 1，<code>C,D</code> 变化 → 项为 <code>A' B</code>（C、D 被消去）。</li>
+</ul>
+<hr>
+<h2 id="关于本质素蕴涵项essential-prime-implicant的补充用于判定谁必须被选">关于“本质素蕴涵项（Essential Prime Implicant）”的补充（用于判定谁必须被选）
+</h2><ul>
+<li><strong>素蕴涵项（Prime Implicant）</strong>：不能再扩大（再包含更多 1）且覆盖若干原始 1 的圈（表示一个不可再合并的乘积项）。</li>
+<li><strong>本质素蕴涵项（Essential PI）</strong>：覆盖至少一个仅由该 PI 覆盖到的 <code>1</code>（即该 <code>1</code> 只被这个 PI 覆盖），因此该 PI 在最小覆盖中是必需的。</li>
+<li>化简流程中常先找出所有本质素蕴涵项并选上它们，然后用剩下的素蕴涵项来覆盖未覆盖的 <code>1</code>，以得到最小覆盖（若存在选择冗余则需比较并选择最优组合）。</li>
+</ul>
+<hr>
+<h2 id="练习建议如何练好卡诺图化简">练习建议（如何练好卡诺图化简）
+</h2><ol>
+<li><strong>初级</strong>：做很多 3 变量 / 4 变量的 K 图练习，重点练习格雷码位置与相邻判断。</li>
+<li><strong>中级</strong>：做含 <code>don't-care</code> 的题目，练习何时把 d 当作 1 使用（当能扩大圈并减少项时就用）。</li>
+<li><strong>高级</strong>：学习识别本质素蕴涵项与冗余覆盖问题（多解情况），尝试多种圈法并比较项数与每项变量数，培养选择“成本最低”的感觉。</li>
+<li><strong>工具辅助</strong>：当变量增多（≥5）时，卡诺图不便，学习使用 Quine–McCluskey 或 布尔代数化简软件 / 仿真工具（但理解卡诺图有助于直觉）</li>
+</ol>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/Hugo-stack-lazymuse/tags/computer-organization/">Computer Organization</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/Hugo-stack-lazymuse/p/computer-organization-note-part-iv/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Computer Organization Note Part IV</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/Hugo-stack-lazymuse/p/computer-organization-note-part-ii/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Computer Organization Note Part II</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/Hugo-stack-lazymuse/p/computer-organization-note-special-ii/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Computer Organization Note Special II</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/Hugo-stack-lazymuse/p/computer-organization-note-part-i/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Computer Organization Note Part I</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/Hugo-stack-lazymuse/p/computer-organization-note-special-i/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Computer Organization Note Special I</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 lazy
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.31.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/Hugo-stack-lazymuse/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

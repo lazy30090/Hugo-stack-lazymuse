@@ -7,7 +7,557 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>lazy</copyright>
-        <lastBuildDate>Fri, 10 Oct 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://lazy30090.github.io/Hugo-stack-lazymuse/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 12 Oct 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://lazy30090.github.io/Hugo-stack-lazymuse/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Computer Organization Note Part IV</title>
+        <link>https://lazy30090.github.io/Hugo-stack-lazymuse/p/computer-organization-note-part-iv/</link>
+        <pubDate>Sun, 12 Oct 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://lazy30090.github.io/Hugo-stack-lazymuse/p/computer-organization-note-part-iv/</guid>
+        <description>&lt;h2 id=&#34;引言指令与指令系统&#34;&gt;引言：指令与指令系统
+&lt;/h2&gt;&lt;h3 id=&#34;1-计算机中的信息分类&#34;&gt;1. 计算机中的信息分类
+&lt;/h3&gt;&lt;p&gt;计算机是处理信息的工具，其内部处理的信息可以分为两大类：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;数据型信息 (Data)&lt;/strong&gt;: 这是计算机程序加工和处理的对象。
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;数值型数据&lt;/strong&gt;: 如整数、浮点数，用于算术运算。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;非数值型数据&lt;/strong&gt;: 如字符、字符串、逻辑值，用于逻辑判断和人机交互。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;控制型信息 (Control)&lt;/strong&gt;: 这是指导计算机如何操作的命令。
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;指令 (Instruction)&lt;/strong&gt;: 宏观层面上，CPU能够识别和执行的命令。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;微命令 (Micro-command)&lt;/strong&gt;: 微观层面上，构成一条指令的更基本、更底层的控制信号。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-计算机的工作步骤&#34;&gt;2. 计算机的工作步骤
+&lt;/h3&gt;&lt;p&gt;计算机的运行本质上就是周而复始地执行指令序列，其基本工作流程包含三个步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;取指令 (Instruction Fetch)&lt;/strong&gt;: CPU根据程序计数器 (PC) 的指示，从主存储器中取出下一条要执行的指令。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;执行指令 (Instruction Execute)&lt;/strong&gt;: CPU对指令进行译码，并根据指令要求执行相应的操作（如算术逻辑运算）。在此过程中，可能还需要从主存或寄存器中获取操作数。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;存放结果 (Store Result)&lt;/strong&gt;: 将执行指令后得到的结果写回到主存或寄存器中。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;3-指令与指令系统的定义&#34;&gt;3. 指令与指令系统的定义
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;指令 (Instruction)&lt;/strong&gt;: 指示计算机执行某种操作的命令。它是一系列按照特定格式排列的二进制代码，CPU可以识别并执行。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;指令系统 (Instruction Set) / 指令集架构 (ISA)&lt;/strong&gt;: 一台计算机所能识别和执行的&lt;strong&gt;全部指令的集合&lt;/strong&gt;。它是计算机硬件功能与软件之间的接口，直接反映了CPU所具备的功能。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;21-指令格式&#34;&gt;2.1 指令格式
+&lt;/h2&gt;&lt;p&gt;指令格式定义了指令的二进制结构，即哪些位代表什么含义。&lt;/p&gt;
+&lt;h3 id=&#34;1-指令基本格式&#34;&gt;1. 指令基本格式
+&lt;/h3&gt;&lt;p&gt;一条指令通常包含两部分核心信息：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;操作码 (Opcode, OP)&lt;/strong&gt;: 指定了该指令要执行的&lt;strong&gt;操作类型&lt;/strong&gt;，如加法、减法、数据传送等。&lt;strong&gt;一条指令中有且仅有一个操作码&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;地址码 (Address, AD)&lt;/strong&gt;: 指定了参与操作的&lt;strong&gt;操作数的位置&lt;/strong&gt;或指令执行后&lt;strong&gt;结果的存放位置&lt;/strong&gt;。一条指令中可以有0个、1个、2个或3个地址码。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;基本格式:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;+--------------+-----------------+
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|   操作码 OP   |     地址码 A     |
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;+--------------+-----------------+
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;2-指令字长&#34;&gt;2. 指令字长
+&lt;/h3&gt;&lt;p&gt;指令字长是指一条指令所占用的二进制位数。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;优点&lt;/strong&gt;: 指令字长越长，可以包含更复杂的操作码和更多的地址信息，从而使指令功能更丰富。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;缺点&lt;/strong&gt;: 指令字长越长，会占用更多的存储空间，并且从主存中取指令需要更长的时间，这会降低指令的执行速度。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;“瓶颈”问题&lt;/strong&gt;: CPU的内部处理速度远快于访问主存储器的速度。例如，一个2GHz的CPU，其内部操作周期约为0.5纳秒 (ns)，而访问一次主存可能需要5纳秒 (ns)，速度相差一个数量级。因此，频繁地访问主存（如取长指令）会成为性能瓶颈。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h3 id=&#34;3-操作码结构&#34;&gt;3. 操作码结构
+&lt;/h3&gt;&lt;p&gt;操作码的位数决定了指令系统能支持多少种不同的操作。&lt;/p&gt;
+&lt;h4 id=&#34;1-定长操作码&#34;&gt;(1) 定长操作码
+&lt;/h4&gt;&lt;p&gt;所有指令的操作码都具有相同的长度和固定的位置（通常在指令的最高位部分）。这种方式译码简单，但可能会限制指令总数或浪费指令空间。&lt;/p&gt;
+&lt;h4 id=&#34;2-扩展操作码&#34;&gt;(2) 扩展操作码
+&lt;/h4&gt;&lt;p&gt;指令字长固定，但操作码的长度可变。其核心思想是，让地址码较少的指令拥有更长的操作码，从而在不增加指令总长度的前提下，支持更多的指令类型。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;示例&lt;/strong&gt;: 假设指令字长为16位，地址码每个占4位。设计一个支持15条三地址指令、15条二地址指令、15条一地址指令和16条零地址指令的系统。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;三地址指令 (15条)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;OP(4位) | A1(4位) | A2(4位) | A3(4位)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;操作码 &lt;code&gt;0000&lt;/code&gt; 到 &lt;code&gt;1110&lt;/code&gt; (15条)。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;1111&lt;/code&gt; 作为&lt;strong&gt;扩展标志&lt;/strong&gt;，表示这不是一条三地址指令。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;二地址指令 (15条)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;1111 | OP&#39;(4位) | A1(4位) | A2(4位)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;前4位 &lt;code&gt;1111&lt;/code&gt; 表示扩展。&lt;/li&gt;
+&lt;li&gt;OP&amp;rsquo; 从 &lt;code&gt;0000&lt;/code&gt; 到 &lt;code&gt;1110&lt;/code&gt; (15条)。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;1111 1111&lt;/code&gt; 作为下一级的扩展标志。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;一地址指令 (15条)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;1111 | 1111 | OP&#39;&#39;(4位) | A1(4位)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;前8位 &lt;code&gt;1111 1111&lt;/code&gt; 表示扩展。&lt;/li&gt;
+&lt;li&gt;OP&amp;rsquo;&amp;rsquo; 从 &lt;code&gt;0000&lt;/code&gt; 到 &lt;code&gt;1110&lt;/code&gt; (15条)。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;1111 1111 1111&lt;/code&gt; 作为下一级的扩展标志。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;零地址指令 (16条)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;1111 | 1111 | 1111 | OP&#39;&#39;&#39;(4位)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;前12位 &lt;code&gt;1111 1111 1111&lt;/code&gt; 表示扩展。&lt;/li&gt;
+&lt;li&gt;OP&amp;rsquo;&amp;rsquo;&amp;rsquo; 从 &lt;code&gt;0000&lt;/code&gt; 到 &lt;code&gt;1111&lt;/code&gt; (16条)，这里不再需要扩展标志，所以4位可以全部用来编码。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3-方式码&#34;&gt;(3) 方式码
+&lt;/h4&gt;&lt;p&gt;将操作码字段划分为几个部分，每个部分代表一种操作属性或方式。例如，一个算术逻辑指令的操作码可以分为：基本操作、是否影响进位、是否移位、结果是否回送等部分。&lt;/p&gt;
+&lt;h3 id=&#34;4-指令中的地址结构&#34;&gt;4. 指令中的地址结构
+&lt;/h3&gt;&lt;h4 id=&#34;1-操作数的位置&#34;&gt;(1) 操作数的位置
+&lt;/h4&gt;&lt;p&gt;操作数可以存放在：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;CPU内部寄存器&lt;/strong&gt;: 访问速度最快。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;主存储器 (包括Cache)&lt;/strong&gt;: 速度次之。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;外存&lt;/strong&gt;: 速度最慢，CPU不能直接访问，需先调入内存。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;堆栈 (Stack)&lt;/strong&gt;: 一种特殊的内存区域，按“后进先出”(LIFO)原则组织数据。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-显地址与隐地址&#34;&gt;(2) 显地址与隐地址
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;显地址 (Explicit Address)&lt;/strong&gt;: 在指令中明确地给出了操作数的地址（如内存单元号或寄存器编号）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;隐地址 (Implicit Address)&lt;/strong&gt;: 指令中不给出地址，而是通过系统事先的约定来确定操作数的位置。例如，约定累加器(AC)总是作为其中一个操作数和结果的存放地。使用隐地址是&lt;strong&gt;简化地址结构、缩短指令长度&lt;/strong&gt;的基本途径。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3-按地址码数量分类&#34;&gt;(3) 按地址码数量分类
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;四地址指令&lt;/strong&gt;: &lt;code&gt;OP | A1 | A2 | A3 | A4&lt;/code&gt;
+&lt;ul&gt;
+&lt;li&gt;功能: &lt;code&gt;(A1) OP (A2) -&amp;gt; A3&lt;/code&gt;, &lt;code&gt;下一条指令在A4&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;非常罕见，因为程序通常是顺序执行的，A4大部分情况下是多余的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;三地址指令&lt;/strong&gt;: &lt;code&gt;OP | A1 | A2 | A3&lt;/code&gt;
+&lt;ul&gt;
+&lt;li&gt;功能: &lt;code&gt;(A1) OP (A2) -&amp;gt; A3&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;下一条指令地址由&lt;strong&gt;程序计数器(PC)&lt;/strong&gt; 隐含提供: &lt;code&gt;(PC) + n -&amp;gt; PC&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;二地址指令&lt;/strong&gt;: &lt;code&gt;OP | A1 | A2&lt;/code&gt;
+&lt;ul&gt;
+&lt;li&gt;功能: &lt;code&gt;(A1) OP (A2) -&amp;gt; A1&lt;/code&gt; (或 A2)。结果覆盖其中一个操作数。&lt;/li&gt;
+&lt;li&gt;这是最常见的指令格式之一，如 &lt;code&gt;ADD AX, BX&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;一地址指令&lt;/strong&gt;: &lt;code&gt;OP | A1&lt;/code&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;双操作数指令&lt;/strong&gt;: 一个操作数在A1，另一个操作数隐含在累加器(AC)中。功能: &lt;code&gt;(A1) OP (AC) -&amp;gt; AC&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;单操作数指令&lt;/strong&gt;: 只对A1处的一个操作数进行操作。功能: &lt;code&gt;OP(A1) -&amp;gt; A1&lt;/code&gt;，如 &lt;code&gt;NOT BL&lt;/code&gt; (按位取反)。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;零地址指令&lt;/strong&gt;: &lt;code&gt;OP&lt;/code&gt;
+&lt;ul&gt;
+&lt;li&gt;不含地址码。操作数通常隐含在&lt;strong&gt;堆栈的顶部&lt;/strong&gt;。例如，&lt;code&gt;PUSH&lt;/code&gt; 和 &lt;code&gt;POP&lt;/code&gt; 指令。&lt;/li&gt;
+&lt;li&gt;也包括一些不需要操作数的指令，如 &lt;code&gt;NOP&lt;/code&gt; (空操作) 和 &lt;code&gt;HLT&lt;/code&gt; (停机)。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;22-指令寻址方式-重点与难点&#34;&gt;2.2 指令寻址方式 (重点与难点)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;寻址方式&lt;/strong&gt;定义了指令中的地址码字段应该如何解释，以最终找到所需的操作数。### 四大类寻址方式&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;立即寻址&lt;/strong&gt;: 指令中直接包含操作数本身。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;直接寻址类&lt;/strong&gt;: 指令中直接给出操作数的地址（主存单元号或寄存器号）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;间接寻址类&lt;/strong&gt;: 指令中给出的是一个地址指针，需要通过该指针再次访问才能找到操作数。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;变址类&lt;/strong&gt;: 指令中给出的地址需要和某个寄存器的内容相加，才能得到最终的有效地址。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;详细解析各种寻址方式&#34;&gt;详细解析各种寻址方式
+&lt;/h3&gt;&lt;h4 id=&#34;1-立即寻址-immediate-addressing&#34;&gt;(1) 立即寻址 (Immediate Addressing)
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;定义&lt;/strong&gt;: 地址码字段给出的不是地址，而是&lt;strong&gt;操作数本身&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;优点&lt;/strong&gt;: 取出指令的同时就获得了操作数，无需再次访存，速度快。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;缺点&lt;/strong&gt;: 操作数大小受到地址码位数的限制。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;: &lt;code&gt;MOV AX, 1234H&lt;/code&gt; (将立即数&lt;code&gt;1234H&lt;/code&gt;送入AX寄存器)。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-直接寻址类&#34;&gt;(2) 直接寻址类
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;主存直接寻址&lt;/strong&gt;: 指令中直接给出操作数在&lt;strong&gt;主存中的有效地址&lt;/strong&gt;。
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;优点&lt;/strong&gt;: 简单直观。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;缺点&lt;/strong&gt;: 地址码位数决定了可寻址空间的大小，灵活性差。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关系&lt;/strong&gt;: &lt;code&gt;操作数 = (A)&lt;/code&gt;，其中 A 是指令中给出的地址。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;: &lt;code&gt;MOV AX, [2000H]&lt;/code&gt; (将内存地址&lt;code&gt;2000H&lt;/code&gt;单元的内容送入AX)。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;寄存器寻址&lt;/strong&gt;: 指令中直接给出操作数所在的&lt;strong&gt;寄存器编号&lt;/strong&gt;。
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;优点&lt;/strong&gt;: 无需访问主存，速度极快；寄存器数量少，地址码短，指令长度也短。这是现代CPU提高性能的重要手段。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关系&lt;/strong&gt;: &lt;code&gt;操作数 = (Ri)&lt;/code&gt;，其中 Ri 是指令中指定的寄存器。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;: &lt;code&gt;MOV AX, BX&lt;/code&gt; (将BX寄存器的内容送入AX)。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3-间接寻址类&#34;&gt;(3) 间接寻址类
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;主存间接寻址&lt;/strong&gt;: 指令中给出的地址是&lt;strong&gt;存放操作数地址的内存单元的地址&lt;/strong&gt;。
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;过程&lt;/strong&gt;: 需要两次访问主存才能获得操作数。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;优点&lt;/strong&gt;: 扩大了寻址范围（地址码位数不变，但可以指向更大的地址空间），便于编程（如实现指针）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关系&lt;/strong&gt;: &lt;code&gt;有效地址 = (A)&lt;/code&gt;, &lt;code&gt;操作数 = ((A))&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;: 指令地址码为&lt;code&gt;2000H&lt;/code&gt;，&lt;code&gt;2000H&lt;/code&gt;单元内容为&lt;code&gt;3000H&lt;/code&gt;，&lt;code&gt;3000H&lt;/code&gt;单元内容为&lt;code&gt;AC00H&lt;/code&gt;。最终得到的操作数是&lt;code&gt;AC00H&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;寄存器间接寻址&lt;/strong&gt;: 指令中给出寄存器编号，该&lt;strong&gt;寄存器中存放的是操作数的有效地址&lt;/strong&gt;。
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;过程&lt;/strong&gt;: 访问1次寄存器和1次主存。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;优点&lt;/strong&gt;: 结合了寄存器寻址的速度和间接寻址的灵活性。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关系&lt;/strong&gt;: &lt;code&gt;有效地址 = (Ri)&lt;/code&gt;, &lt;code&gt;操作数 = ((Ri))&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;: &lt;code&gt;MOV AX, [BX]&lt;/code&gt; (将DS段中，由BX寄存器内容所指向的内存单元的数据送入AX)。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;自增/自减型寄存器间址&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;自增型 &lt;code&gt;(R)+&lt;/code&gt;&lt;/strong&gt;: 先按寄存器内容寻址，获取操作数后，再将寄存器内容自动加1（或一个字长）。常用于处理连续数据块。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;自减型 &lt;code&gt;-(R)&lt;/code&gt;&lt;/strong&gt;: 先将寄存器内容自动减1（或一个字长），再按新的寄存器内容寻址。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;堆栈寻址&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;操作数隐含在堆栈顶部。地址由&lt;strong&gt;堆栈指针寄存器(SP)&lt;/strong&gt; 给出。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;压栈 (PUSH)&lt;/strong&gt;: &lt;code&gt;(SP) - 1 -&amp;gt; SP&lt;/code&gt;, &lt;code&gt;数据 -&amp;gt; ((SP))&lt;/code&gt; (先移动指针，再存数据)。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;弹栈 (POP)&lt;/strong&gt;: &lt;code&gt;数据 &amp;lt;- ((SP))&lt;/code&gt;, &lt;code&gt;(SP) + 1 -&amp;gt; SP&lt;/code&gt; (先取数据，再移动指针)。&lt;/li&gt;
+&lt;li&gt;这是一种特殊的寄存器间址方式。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;4-变址类-地址计算&#34;&gt;(4) 变址类 (地址计算)
+&lt;/h4&gt;&lt;p&gt;这类寻址方式的&lt;strong&gt;有效地址 (EA)&lt;/strong&gt; 是由指令中给出的&lt;strong&gt;形式地址D&lt;/strong&gt;和某个寄存器的内容计算得出的。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;变址寻址&lt;/strong&gt;: &lt;code&gt;EA = (Rx) + D&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Rx&lt;/strong&gt;: 变址寄存器 (如SI, DI)，内容可变，通常用于访问数组或字符串中的元素。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;D&lt;/strong&gt;: 形式地址，是基准量，固定不变。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;面向用户&lt;/strong&gt;，用于处理成批数据。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;示例&lt;/strong&gt;: &lt;code&gt;MOV AX, 10H[SI]&lt;/code&gt; (EA = (SI) + 10H)。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;23-指令类型&#34;&gt;2.3 指令类型
+&lt;/h2&gt;&lt;h3 id=&#34;1-指令分类方法&#34;&gt;1. 指令分类方法
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;按指令格式分类&lt;/strong&gt;: 双操作数、单操作数指令等。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;按寻址方式分类&lt;/strong&gt;: RR型 (寄存器-寄存器)、RX型 (寄存器-内存) 等。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;按指令功能分类&lt;/strong&gt;: 这是最常用、最重要的方法。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-按功能分类的指令&#34;&gt;2. 按功能分类的指令
+&lt;/h3&gt;&lt;h4 id=&#34;1-传送类指令&#34;&gt;(1) 传送类指令
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;一般传送指令 (MOV, LOAD, STORE)&lt;/strong&gt;: 在寄存器之间、寄存器与内存之间、内存与内存之间（通常不直接支持）传送数据。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;堆栈指令 (PUSH, POP)&lt;/strong&gt;: 对堆栈进行压入和弹出操作。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据交换指令 (XCHG)&lt;/strong&gt;: 交换两个操作数的内容。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-输入输出-io-指令&#34;&gt;(2) 输入/输出 (I/O) 指令
+&lt;/h4&gt;&lt;p&gt;用于主机与外设之间的数据交换，本质上也是一种传送指令。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;外围设备编址方式&lt;/strong&gt;:
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;单独编址 (Isolated I/O)&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;I/O设备拥有独立的地址空间，称为&lt;strong&gt;端口地址&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;需要专用的I/O指令 (如 &lt;code&gt;IN&lt;/code&gt;, &lt;code&gt;OUT&lt;/code&gt;) 来访问。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;优点&lt;/strong&gt;: I/O操作与内存操作易于区分，不占用内存地址空间。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;缺点&lt;/strong&gt;: 需要额外的控制信号线 (I/O Read, I/O Write)。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;统一编址 (Memory-Mapped I/O)&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;将I/O设备的接口寄存器看作主存单元，分配主存地址。&lt;/li&gt;
+&lt;li&gt;可以使用通用的数据传送指令 (如 &lt;code&gt;MOV&lt;/code&gt;) 来访问I/O设备。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;优点&lt;/strong&gt;: 指令类型更少，寻址方式更灵活。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;缺点&lt;/strong&gt;: 占用主存地址空间。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;I/O指令的设置方法&lt;/strong&gt;:
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;设置专用I/O指令&lt;/strong&gt;: 对应单独编址方式，如 &lt;code&gt;IN AL, 20H&lt;/code&gt; (从端口20H读一字节到AL)。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;采用通用数据传送指令&lt;/strong&gt;: 对应统一编址方式。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;通过I/O处理器&lt;/strong&gt;: CPU向I/O处理器发送通用的命令字，由I/O处理器解释并执行具体的外设操作。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>Computer Organization Note Part III</title>
+        <link>https://lazy30090.github.io/Hugo-stack-lazymuse/p/computer-organization-note-part-iii/</link>
+        <pubDate>Sat, 11 Oct 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://lazy30090.github.io/Hugo-stack-lazymuse/p/computer-organization-note-part-iii/</guid>
+        <description>&lt;h1 id=&#34;计算机组成原理卡诺图&#34;&gt;《计算机组成原理》：卡诺图
+&lt;/h1&gt;&lt;p&gt;概念回顾（为什么用卡诺图）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;卡诺图是一种以图形方式表示 n 变量逻辑函数最小项（minterm）并进行化简的方法。&lt;/li&gt;
+&lt;li&gt;通过把逻辑上“相邻”的最小项在几何位置上也安排相邻，可以直观地找到可以合并的项（消去变量），从而得到更简的与-或（积之和）形式。&lt;/li&gt;
+&lt;li&gt;目标：用尽可能少、尽可能大的“卡诺圈”覆盖所有值为 1 的小格，得到最简或接近最简的表达式（最小项数量少、每项变量数少、并考虑成本与实现）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;基本规则必须完全掌握&#34;&gt;基本规则（必须完全掌握）
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;格子与编号&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;n 变量共有 &lt;code&gt;2^n&lt;/code&gt; 个最小项，对应 &lt;code&gt;2^n&lt;/code&gt; 个小方格。格子的二进制标号按 &lt;strong&gt;格雷码（Gray code）&lt;/strong&gt; 排列（使相邻格子的编号只有一位不同）。&lt;/li&gt;
+&lt;li&gt;常见布局：
+&lt;ul&gt;
+&lt;li&gt;2 变量：2×2；&lt;/li&gt;
+&lt;li&gt;3 变量：2 行×4 列（行表示最高位，列为两低位的格雷码顺序 00,01,11,10）；&lt;/li&gt;
+&lt;li&gt;4 变量：4 行×4 列（行、列均为两位格雷码：00,01,11,10）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;圈的大小&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;只能圈 &lt;code&gt;2^k&lt;/code&gt;（k = 0,1,2,&amp;hellip;）个相邻格子（即 1、2、4、8…）。&lt;/li&gt;
+&lt;li&gt;圈必须是矩形（允许正方形）并且边界可“环绕”（图两边相邻，称 wrap-around），例如最左列与最右列相邻；最上行与最下行相邻。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;圈的原则&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;优先圈 &lt;strong&gt;尽可能大的&lt;/strong&gt; 2^k 个相邻的 &lt;code&gt;1&lt;/code&gt;（越大消去的变量越多）。&lt;/li&gt;
+&lt;li&gt;每一个 &lt;code&gt;1&lt;/code&gt; 必须至少被&lt;strong&gt;一个&lt;/strong&gt;圈覆盖（但每个 &lt;code&gt;1&lt;/code&gt; 可以被多个圈覆盖）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;每个圈至少要包含一个“独立的 1”&lt;/strong&gt;（essential 1/独立 1），否则该圈可能是多余的（避免多余项）。&lt;/li&gt;
+&lt;li&gt;圈的数量应尽可能少，且尽可能覆盖更多 &lt;code&gt;1&lt;/code&gt;（使表达式项数最少）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;如何从圈得到乘积项（与项）&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;在圈中，找出在圈内不发生变化（始终为 0 或始终为 1）的变量。&lt;/li&gt;
+&lt;li&gt;若变量在圈内恒为 1，则在乘积项中保留该变量（原变量）；若恒为 0，则在乘积项中保留该变量的反（补）形式；若变量在圈内既 0 又 1（发生变化），则该变量在乘积项中被&lt;strong&gt;消去&lt;/strong&gt;（不出现）。&lt;/li&gt;
+&lt;li&gt;最后把所有圈得到的乘积项作或（相加）就是化简后的与-或式（积之和）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;don&#39;t-care&lt;/code&gt;（无关项）的处理&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;don&#39;t-care&lt;/code&gt;（通常用 &lt;code&gt;d&lt;/code&gt; 表示）是指某些输入组合在实际应用中不会出现或其输出不关心，这些格子在 K 图中既可以按 1 看待也可以按 0 看待，用来&lt;strong&gt;帮助形成更大的圈&lt;/strong&gt;以获得更简的解。&lt;/li&gt;
+&lt;li&gt;规则：在圈时&lt;strong&gt;可以把 d 当作 1 使用以扩大圈&lt;/strong&gt;，但最终表达式不需要为 d 单独输出（即不强制要求包含 d）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;最简式可能不唯一&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;不同的圈法可能产生不同但等价的最简表达式；因此出现多解是正常的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;实操要点--易错点总结&#34;&gt;实操要点 / 易错点（总结）
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;列/行必须按 &lt;strong&gt;格雷码&lt;/strong&gt; 排列（否则相邻概念失效）。&lt;/li&gt;
+&lt;li&gt;圈只能是 2 的次方个格子，且要成矩形（不能 L 形）。&lt;/li&gt;
+&lt;li&gt;圈可以重叠；合理重叠能减少项数。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;1&lt;/code&gt; 必须被覆盖，但不要为了覆盖而生成冗余的圈（优先圈必需的“本质素蕴涵项”）。&lt;/li&gt;
+&lt;li&gt;使用 &lt;code&gt;don&#39;t-care&lt;/code&gt; 时小心：把 d 当 1 用是为了简化，但如果不必要就不要把它当 1；d 的使用只为取得更大圈、更多消去变量。&lt;/li&gt;
+&lt;li&gt;最后要逐个最小项核对（用代数或真值表）确保化简后的表达式覆盖所有原始为 1 的输入。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;例子-1--3-变量最直接说明圈与结果的规则&#34;&gt;例子 1 — &lt;strong&gt;3 变量&lt;/strong&gt;（最直接、说明圈与结果的规则）
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;定义&lt;/strong&gt;：令三个变量为 &lt;code&gt;A,B,C&lt;/code&gt;（A 为最高位）。
+设函数&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;F(A,B,C) = Σ m(1,3,5,7)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;（即当输入为 001、011、101、111 时输出为 1）&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;步骤&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;画 3-变量 K 图（2 行 × 4 列），列的 BC 顺序为 &lt;code&gt;00,01,11,10&lt;/code&gt;（格雷码），行 A 为 &lt;code&gt;0&lt;/code&gt;（上）与 &lt;code&gt;1&lt;/code&gt;（下）。&lt;/li&gt;
+&lt;li&gt;标出 1 的格子：m1(001)、m3(011)、m5(101)、m7(111) —— 这四个格子恰好是**两列的同一列（列对应 C=1）**的上下两个单元：实际上这 4 个都是 C = 1 的组合（不论 A、B 为何）。&lt;/li&gt;
+&lt;li&gt;围成&lt;strong&gt;一个 4 格的列圈&lt;/strong&gt;（最大可能），该圈覆盖所有四个 1。&lt;/li&gt;
+&lt;li&gt;从圈中看变量不变的：&lt;code&gt;C&lt;/code&gt; 在圈中恒为 &lt;code&gt;1&lt;/code&gt;（列固定），而 &lt;code&gt;A&lt;/code&gt;、&lt;code&gt;B&lt;/code&gt; 在圈内变化（被消去）。&lt;/li&gt;
+&lt;li&gt;因此乘积项为 &lt;code&gt;C&lt;/code&gt;。 最终：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;F = C
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;结论/说明&lt;/strong&gt;：这个例子演示了“把尽可能多的 1 包成大圈”能直接消去多数变量，得到极简表达式。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;例子-2--4-变量含-dont-care-的实用示例说明如何利用-d-扩大圈并得到更少的项&#34;&gt;例子 2 — &lt;strong&gt;4 变量&lt;/strong&gt;（含 &lt;code&gt;don&#39;t-care&lt;/code&gt; 的实用示例：说明如何利用 d 扩大圈并得到更少的项）
+&lt;/h2&gt;&lt;p&gt;设 4 个变量为 &lt;code&gt;A,B,C,D&lt;/code&gt;（&lt;code&gt;AB&lt;/code&gt; 行、&lt;code&gt;CD&lt;/code&gt; 列，行/列的顺序均为格雷码 &lt;code&gt;00,01,11,10&lt;/code&gt;）。
+定义函数（示例）：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;F(A,B,C,D) = Σ m(0,2,5,7,8,10)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;don&amp;#39;t-care d = Σ m(1,3,9,11)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;1-把最小项与-d-填入-k-图表格化表示&#34;&gt;1) 把最小项与 d 填入 K 图（表格化表示）
+&lt;/h3&gt;&lt;p&gt;下面给出 K-map 的排列（行 = AB：00 / 01 / 11 / 10；列 = CD：00 / 01 / 11 / 10）并标注 minterm 编号：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;K-map index layout (rows AB, cols CD):
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;       CD
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;       00   01   11   10
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;AB
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;00     m0   m1   m3   m2
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;01     m4   m5   m7   m6
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;11     m12  m13  m15  m14
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;10     m8   m9   m11  m10
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;将给定的 1 / d 填入（X 表示 1， d 表示 don&amp;rsquo;t-care，空白为 0）：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;       CD
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;       00   01   11   10
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;AB
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;00     X    d    d    X     (m0=1, m1=d, m3=d, m2=1)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;01     .    X    X    .     (m4=., m5=1, m7=1, m6=.)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;11     .    .    .    .     (m12..m15 all 0 / not used here)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;10     X    d    d    X     (m8=1, m9=d, m11=d, m10=1)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;（&lt;code&gt;.&lt;/code&gt; 表示 0 / 空）&lt;/p&gt;
+&lt;h3 id=&#34;2-寻找并圈出尽可能大的-2k-相邻块允许使用-d-作为-1&#34;&gt;2) 寻找并圈出尽可能大的 2^k 相邻块（允许使用 d 作为 1）
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;目标&lt;/strong&gt;：用尽量少且尽量大的圈覆盖所有 X（真实的 1），可以把 d 看作 1 以便扩大圈。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;圈法建议与选择&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;可以把左上 2×2（由 m0, m1(d), m8, m9(d) 组成）圈成一个 4 格（cover m0 &amp;amp; m8 plus d&amp;rsquo;s）。这个圈对应 &lt;code&gt;B&#39; C&#39;&lt;/code&gt;（见下文推导）。&lt;/li&gt;
+&lt;li&gt;类似地，把右下两列（col &lt;code&gt;11&lt;/code&gt; 与 &lt;code&gt;10&lt;/code&gt;）在上/下合并利用 d，或把 m2、m10 与相邻的 d（m3、m11）围成 4 格，得到 &lt;code&gt;B&#39; C&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;对 m5、m7（位于 AB=01 行，列 01 和 11）可以圈成一个 1×2 的横向圈（这将保留 A&amp;rsquo;·B·D，因为 D=1 恒定，A&amp;rsquo;=1 恒定，B=1 恒定），也可以检查是否有更大的圈通过别的 d 扩大（此示例中 m5 与 m7 最简是由 A&amp;rsquo;·B·D 覆盖）。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;下面给出一个&lt;strong&gt;合理的最简覆盖&lt;/strong&gt;（示范）：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;圈 A（4 格）&lt;/strong&gt;：覆盖 m0, m1(d), m8, m9(d) → 形成一个 2×2 块（左上与左下两行、左两列）。
+&lt;ul&gt;
+&lt;li&gt;在该圈中：
+&lt;ul&gt;
+&lt;li&gt;对列（CD）来看，列为 &lt;code&gt;00&lt;/code&gt; 与 &lt;code&gt;01&lt;/code&gt;，它们的 C 位均为 &lt;code&gt;0&lt;/code&gt;（C = 0 恒定），D 变化 → D 被消去；&lt;/li&gt;
+&lt;li&gt;对行（AB）来看，行为 &lt;code&gt;00&lt;/code&gt; 与 &lt;code&gt;10&lt;/code&gt;，对应 B = 0 恒定（A 变化） → A 被消去，B = 0 成为常量（记作 B&amp;rsquo;）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;因此乘积项为 &lt;code&gt;B&#39; C&#39;&lt;/code&gt;（B=0 → B&amp;rsquo;，C=0 → C&amp;rsquo;）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;圈 B（4 格）&lt;/strong&gt;：覆盖 m2, m3(d), m10, m11(d) → 形成右侧两列同样的 2×2 块。
+&lt;ul&gt;
+&lt;li&gt;在该圈中：列为 &lt;code&gt;11&lt;/code&gt; 与 &lt;code&gt;10&lt;/code&gt;（两列均有 C = 1 恒定），行为 &lt;code&gt;00&lt;/code&gt; 与 &lt;code&gt;10&lt;/code&gt;（B = 0 恒定），得到 &lt;code&gt;B&#39; C&lt;/code&gt;。
+-（注意：如果不使用 d，则可能需要两个 1×1 或 1×2 的小圈；使用 d 能把它们合并为更大圈，从而消去更多变量。）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;圈 C（2 格）&lt;/strong&gt;：覆盖 m5 与 m7（AB = 01 行，CD = 01 与 11 两列）
+&lt;ul&gt;
+&lt;li&gt;在该圈中：行固定为 &lt;code&gt;01&lt;/code&gt; → A = 0（A&amp;rsquo;），B = 1；列两格 CD=01 与 CD=11 对应 D = 1 恒定、C 变化 → C 被消去，D 保留。&lt;/li&gt;
+&lt;li&gt;乘积项为 &lt;code&gt;A&#39; B D&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;3-写出化简表达式把每个圈对应的乘积项求或&#34;&gt;3) 写出化简表达式（把每个圈对应的乘积项求或）
+&lt;/h3&gt;&lt;p&gt;将上面三圈对应的乘积项相加：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;F = B&amp;#39; C&amp;#39;  +  B&amp;#39; C  +  A&amp;#39; B D
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;注意：&lt;code&gt;B&#39; C&#39; + B&#39; C = B&#39; (C&#39; + C) = B&#39;&lt;/code&gt;，因此可以进一步化简：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;F = B&amp;#39;  +  A&amp;#39; B D
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;4-验证直观检查覆盖了所有原始-1&#34;&gt;4) 验证（直观检查覆盖了所有原始 1）
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;B&#39;&lt;/code&gt; 覆盖了所有 B = 0 的情况（AB 行 00 与 10），即包含 m0, m2, m8, m10（以及包含在 d 的格子），这些都是原始的 1。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;A&#39; B D&lt;/code&gt; 覆盖 AB=01 且 D=1 的格子，即 m5、m7。&lt;/li&gt;
+&lt;li&gt;因此所有原始的 1（m0,m2,m5,m7,m8,m10）都被覆盖，且没有需要单独覆盖的遗留 1。表达式正确且更简。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;如何把圈直接转成代数项快速记法&#34;&gt;如何把“圈”直接转成代数项（快速记法）
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;找圈 → 找该圈中不变（恒 0 或恒 1）的变量 → 转成乘积：
+&lt;ul&gt;
+&lt;li&gt;恒为 1 → 写出该变量（不补）。&lt;/li&gt;
+&lt;li&gt;恒为 0 → 写出该变量的反（&lt;code&gt;&#39;&lt;/code&gt; 或 &lt;code&gt;¯&lt;/code&gt; 表示）。&lt;/li&gt;
+&lt;li&gt;在圈内变化（既有 0 又有 1）→ 该变量不出现。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;例如：圈里若 &lt;code&gt;A&lt;/code&gt; 固定为 0，&lt;code&gt;B&lt;/code&gt; 固定为 1，&lt;code&gt;C,D&lt;/code&gt; 变化 → 项为 &lt;code&gt;A&#39; B&lt;/code&gt;（C、D 被消去）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;关于本质素蕴涵项essential-prime-implicant的补充用于判定谁必须被选&#34;&gt;关于“本质素蕴涵项（Essential Prime Implicant）”的补充（用于判定谁必须被选）
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;素蕴涵项（Prime Implicant）&lt;/strong&gt;：不能再扩大（再包含更多 1）且覆盖若干原始 1 的圈（表示一个不可再合并的乘积项）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;本质素蕴涵项（Essential PI）&lt;/strong&gt;：覆盖至少一个仅由该 PI 覆盖到的 &lt;code&gt;1&lt;/code&gt;（即该 &lt;code&gt;1&lt;/code&gt; 只被这个 PI 覆盖），因此该 PI 在最小覆盖中是必需的。&lt;/li&gt;
+&lt;li&gt;化简流程中常先找出所有本质素蕴涵项并选上它们，然后用剩下的素蕴涵项来覆盖未覆盖的 &lt;code&gt;1&lt;/code&gt;，以得到最小覆盖（若存在选择冗余则需比较并选择最优组合）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;练习建议如何练好卡诺图化简&#34;&gt;练习建议（如何练好卡诺图化简）
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;初级&lt;/strong&gt;：做很多 3 变量 / 4 变量的 K 图练习，重点练习格雷码位置与相邻判断。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;中级&lt;/strong&gt;：做含 &lt;code&gt;don&#39;t-care&lt;/code&gt; 的题目，练习何时把 d 当作 1 使用（当能扩大圈并减少项时就用）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;高级&lt;/strong&gt;：学习识别本质素蕴涵项与冗余覆盖问题（多解情况），尝试多种圈法并比较项数与每项变量数，培养选择“成本最低”的感觉。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;工具辅助&lt;/strong&gt;：当变量增多（≥5）时，卡诺图不便，学习使用 Quine–McCluskey 或 布尔代数化简软件 / 仿真工具（但理解卡诺图有助于直觉）&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
         <title>Computer Organization Note Part II</title>
         <link>https://lazy30090.github.io/Hugo-stack-lazymuse/p/computer-organization-note-part-ii/</link>
         <pubDate>Fri, 10 Oct 2025 00:00:00 +0000</pubDate>
